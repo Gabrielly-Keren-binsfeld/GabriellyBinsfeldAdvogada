@@ -17,6 +17,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
 
+    <!-- Netlify Identity Widget Script -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -151,7 +154,7 @@
                     <p class="text-slate-600 text-sm mb-4 leading-relaxed">
                         Indenização mensal para trabalhadores que ficaram com sequelas permanentes após acidente de qualquer natureza.
                     </p>
-                    <a href="https://wa.me/554984331669?text=Tenho%20dúvidas%20sobre%20Auxílio-Acidente" 
+                    <a href="https://wa.me/5549984331669?text=Tenho%20dúvidas%20sobre%20Auxílio-Acidente" 
                        target="_blank" class="text-navy-900 font-semibold text-sm hover:text-gold-600 inline-flex items-center gap-1">
                         Consultar Direito <i class="fa-solid fa-arrow-right text-xs"></i>
                     </a>
@@ -341,5 +344,17 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
+    <!-- Netlify Identity Redirection Script -->
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
 </body>
 </html>
