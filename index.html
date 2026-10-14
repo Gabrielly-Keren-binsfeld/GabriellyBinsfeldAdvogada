@@ -299,62 +299,66 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- Script do Leitor Automático de Artigos -->
+    <!-- Script de Leitura Direta de Artigos Local -->
     <script>
         async function carregarListaArtigos() {
             const container = document.getElementById('lista-artigos');
-            try {
-                const res = await fetch('https://api.github.com/repos/josiasdasilveira/dragabriellybinsfeld/contents/content/artigos');
-                if (!res.ok) throw new Error();
-                const files = await res.json();
+            
+            // Lista dos slugs (nome dos arquivos .md na pasta content/artigos/ sem a extensão)
+            const slugsArtigos = [
+                "filho-ou-dependente-com-deficiencia-pode-receber-pensao-por-morte-entenda-como-o-inss-avalia-a-deficiencia"
+            ];
 
-                container.innerHTML = '';
+            let HTMLContent = '';
 
-                for (const file of files) {
-                    if (file.name.endsWith('.md')) {
-                        const slug = file.name.replace('.md', '');
-                        const rawRes = await fetch(file.download_url);
-                        const text = await rawRes.text();
-
-                        const parts = text.split('---');
-                        const metadata = {};
-                        if (parts.length > 1) {
-                            parts[1].split('\n').forEach(line => {
-                                const [key, ...value] = line.split(':');
-                                if (key && value.length) {
-                                    metadata[key.trim()] = value.join(':').trim().replace(/^"(.*)"$/, '$1');
-                                }
-                            });
-                        }
-
-                        const card = `
-                            <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
-                                <div class="p-6">
-                                    <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">${metadata.categoria || 'INSS'}</span>
-                                    <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
-                                        ${metadata.title || 'Artigo'}
-                                    </h3>
-                                    <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
-                                        ${metadata.description || 'Clique abaixo para ler o artigo completo.'}
-                                    </p>
-                                </div>
-                                <div class="p-6 pt-0">
-                                    <a href="artigo.html?post=${slug}" class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
-                                        Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
-                                    </a>
-                                </div>
-                            </article>
-                        `;
-                        container.innerHTML += card;
+            for (const slug of slugsArtigos) {
+                try {
+                    const res = await fetch(`content/artigos/${slug}.md`);
+                    if (!res.ok) continue;
+                    
+                    const text = await res.text();
+                    const parts = text.split('---');
+                    const metadata = {};
+                    
+                    if (parts.length > 1) {
+                        parts[1].split('\n').forEach(line => {
+                            const [key, ...value] = line.split(':');
+                            if (key && value.length) {
+                                metadata[key.trim()] = value.join(':').trim().replace(/^"(.*)"$/, '$1');
+                            }
+                        });
                     }
+
+                    HTMLContent += `
+                        <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                            <div class="p-6">
+                                <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">${metadata.categoria || 'INSS'}</span>
+                                <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
+                                    ${metadata.title || 'Artigo'}
+                                </h3>
+                                <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
+                                    ${metadata.description || 'Clique abaixo para ler o artigo completo.'}
+                                </p>
+                            </div>
+                            <div class="p-6 pt-0">
+                                <a href="artigo.html?post=${slug}" class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
+                                    Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </a>
+                            </div>
+                        </article>
+                    `;
+                } catch (err) {
+                    console.error("Erro ao carregar artigo:", err);
                 }
-                if (container.innerHTML === '') {
-                    container.innerHTML = '<p class="text-center col-span-3 text-slate-500">Nenhum artigo publicado recentemente.</p>';
-                }
-            } catch (e) {
-                container.innerHTML = '<p class="text-center col-span-3 text-slate-500">Nenhum artigo encontrado.</p>';
+            }
+
+            if (HTMLContent !== '') {
+                container.innerHTML = HTMLContent;
+            } else {
+                container.innerHTML = '<p class="text-center col-span-3 text-slate-500">Nenhum artigo publicado recentemente.</p>';
             }
         }
+
         carregarListaArtigos();
     </script>
 
