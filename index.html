@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dra. Maria Silva | Advocacia & Consultoria Jurídica</title>
+    <meta name="description" content="Atendimento jurídico humanizado e especializado. Agende sua consulta.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#d97706',
+                            600: '#b45309',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- Navegação -->
+    <header class="fixed w-full top-0 z-40 bg-navy-950/95 backdrop-blur border-b border-slate-800 text-white">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="font-serif text-xl font-bold tracking-wide text-gold-400 flex items-center gap-2">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>Dra. Maria Silva</span>
+            </a>
+            
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-300">
+                <a href="#inicio" class="hover:text-gold-400 transition">Início</a>
+                <a href="#atuacao" class="hover:text-gold-400 transition">Áreas de Atuação</a>
+                <a href="#sobre" class="hover:text-gold-400 transition">Sobre</a>
+                <a href="#depoimentos" class="hover:text-gold-400 transition">Avaliações</a>
+            </nav>
+
+            <a href="https://wa.me/5500000000000?text=Olá,%20Dra.%20Gostaria%20de%20agendar%20uma%20consulta." 
+               target="_blank" 
+               class="bg-gold-500 hover:bg-gold-600 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm transition flex items-center gap-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span>Falar no WhatsApp</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="pt-32 pb-20 bg-navy-900 text-white relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="inline-block px-3 py-1 bg-gold-500/10 text-gold-400 text-xs font-semibold uppercase tracking-wider rounded-full mb-4 border border-gold-500/20">
+                    Advocacia Especializada & Humanizada
+                </span>
+                <h1 class="font-serif text-4xl sm:text-5xl font-bold leading-tight mb-6">
+                    Defendendo seus direitos com agilidade, ética e dedicação.
+                </h1>
+                <p class="text-slate-300 text-lg mb-8 leading-relaxed">
+                    Soluções jurídicas personalizadas para proteger você, sua família e seus negócios. Atendimento presencial e 100% online em todo o Brasil.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://wa.me/5500000000000?text=Olá,%20preciso%20de%20orientação%20jurídica." 
+                       target="_blank" 
+                       class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-4 rounded-xl text-center shadow-lg hover:shadow-emerald-900/40 transition flex items-center justify-center gap-3">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        <span>Agendar Consulta Jurídica</span>
+                    </a>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-slate-800 grid grid-cols-2 gap-4 text-xs text-slate-400">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-user-shield text-gold-400 text-sm"></i>
+                        <span>Atendimento Sigiloso</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-clock text-gold-400 text-sm"></i>
+                        <span>Resposta Agilizada</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative">
+                <div class="w-full h-[450px] bg-slate-800 rounded-2xl overflow-hidden border-2 border-slate-700 shadow-2xl relative">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800" 
+                         alt="Dra. Maria Silva" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-navy-950 via-navy-950/60 to-transparent p-6">
+                        <p class="font-serif text-xl font-bold text-white">Dra. Maria Silva</p>
+                        <p class="text-gold-400 text-sm">OAB/UF 000.000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Áreas de Atuação -->
+    <section id="atuacao" class="py-20 bg-slate-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="font-serif text-3xl font-bold text-navy-900 mb-4">Como posso ajudar você hoje?</h2>
+                <p class="text-slate-600">Especialidades jurídicas focadas em resolver problemas com transparência e eficiência.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-navy-900 text-gold-400 rounded-xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-navy-900 mb-2">Família e Sucessões</h3>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        Divórcios, guarda de filhos, pensão alimentícia, partilha de bens e inventários.
+                    </p>
+                    <a href="https://wa.me/5500000000000?text=Preciso%20de%20ajuda%20com%20Direito%20de%20Família" 
+                       target="_blank" class="text-navy-900 font-semibold text-sm hover:text-gold-600 inline-flex items-center gap-1">
+                        Consultar <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-navy-900 text-gold-400 rounded-xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-hand-holding-medical"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-navy-900 mb-2">Previdenciário (INSS)</h3>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        Aposentadorias, auxílio-doença, BPC/LOAS e revisão de benefícios previdenciários.
+                    </p>
+                    <a href="https://wa.me/5500000000000?text=Preciso%20de%20ajuda%20com%20INSS" 
+                       target="_blank" class="text-navy-900 font-semibold text-sm hover:text-gold-600 inline-flex items-center gap-1">
+                        Consultar <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-navy-900 text-gold-400 rounded-xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-navy-900 mb-2">Direito Trabalhista</h3>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        Cálculo de verbas rescisórias, horas extras, rescisão indireta e reconhecimento de vínculo.
+                    </p>
+                    <a href="https://wa.me/5500000000000?text=Preciso%20de%20ajuda%20com%20Direito%20Trabalhista" 
+                       target="_blank" class="text-navy-900 font-semibold text-sm hover:text-gold-600 inline-flex items-center gap-1">
+                        Consultar <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-navy-900 text-gold-400 rounded-xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-navy-900 mb-2">Direito do Consumidor</h3>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        Negativação indevida, problemas com planos de saúde, voos cancelados e cobranças abusivas.
+                    </p>
+                    <a href="https://wa.me/5500000000000?text=Preciso%20de%20ajuda%20com%20Direito%20do%20Consumidor" 
+                       target="_blank" class="text-navy-900 font-semibold text-sm hover:text-gold-600 inline-flex items-center gap-1">
+                        Consultar <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="font-serif text-3xl font-bold text-navy-900 mb-6">Compromisso com a Justiça e Defesa dos seus Direitos</h2>
+                <p class="text-slate-600 mb-4 leading-relaxed">
+                    Acredito que por trás de cada processo existe uma história humana que merece respeito, atenção dedicada e combate incansável pelo melhor resultado.
+                </p>
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    Com foco na simplificação da linguagem jurídica, busco manter meus clientes informados sobre cada passo de seu caso com total transparência e proximidade.
+                </p>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center gap-3 text-slate-700 font-medium">
+                        <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                        Especialista em Direito Processual Civil
+                    </li>
+                    <li class="flex items-center gap-3 text-slate-700 font-medium">
+                        <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                        Acompanhamento 100% digital e acessível
+                    </li>
+                    <li class="flex items-center gap-3 text-slate-700 font-medium">
+                        <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                        Ética e sigilo garantidos
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-slate-50 p-8 rounded-2xl border border-slate-200 text-center">
+                <i class="fa-solid fa-quote-left text-4xl text-gold-500 mb-4 block"></i>
+                <blockquote class="font-serif text-lg italic text-slate-800 mb-6">
+                    "A justiça consiste em dar a cada um o que é seu por direito."
+                </blockquote>
+                <p class="font-bold text-navy-900">Dra. Maria Silva</p>
+                <p class="text-sm text-slate-500">Inscrição OAB/UF 000.000</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos (Prova Social) -->
+    <section id="depoimentos" class="py-20 bg-slate-900 text-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="font-serif text-3xl font-bold mb-4">O que dizem os clientes</h2>
+                <div class="flex items-center justify-center gap-1 text-gold-400 text-lg mb-2">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="text-slate-400 text-sm">Avaliação 5.0 estrelas no Google Meu Negócio</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-slate-800/60 p-6 rounded-xl border border-slate-700">
+                    <p class="text-slate-300 italic mb-4">
+                        "Atendimento impecável! A Dra. Maria resolveu minha questão de pensão de forma rápida e me deixou tranquila durante todo o processo."
+                    </p>
+                    <p class="font-semibold text-white text-sm">— Ana Paula R.</p>
+                </div>
+                <div class="bg-slate-800/60 p-6 rounded-xl border border-slate-700">
+                    <p class="text-slate-300 italic mb-4">
+                        "Excelente profissional. Explicou todos os detalhes do meu processo previdenciário com muita paciência e clareza."
+                    </p>
+                    <p class="font-semibold text-white text-sm">— Carlos Eduardo M.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Final -->
+    <section class="py-16 bg-navy-950 text-white border-t border-slate-800 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="font-serif text-3xl font-bold mb-4">Precisa de orientação jurídica urgente?</h2>
+            <p class="text-slate-400 mb-8 max-w-xl mx-auto">
+                Não deixe suas dúvidas para depois. Converse diretamente com quem entende do assunto e encontre a melhor solução para o seu caso.
+            </p>
+            <a href="https://wa.me/5500000000000?text=Olá,%20gostaria%20de%20falar%20com%20a%20Dra.%20Maria." 
+               target="_blank" 
+               class="inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition">
+                <i class="fa-brands fa-whatsapp text-2xl"></i>
+                <span>Falar Diretamente pelo WhatsApp</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900 text-sm">
+        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <p class="font-serif text-lg font-bold text-white mb-2">Dra. Maria Silva</p>
+                <p class="text-xs mb-4">Advocacia e Consultoria Jurídica</p>
+                <p class="text-xs text-slate-500">Inscrição OAB/UF 000.000</p>
+            </div>
+            <div>
+                <p class="font-semibold text-white mb-3">Contato & Endereço</p>
+                <p class="mb-1"><i class="fa-solid fa-location-dot mr-2 text-gold-400"></i> Av. Principal, 1000 - Centro</p>
+                <p class="mb-1"><i class="fa-solid fa-phone mr-2 text-gold-400"></i> (00) 00000-0000</p>
+                <p><i class="fa-solid fa-envelope mr-2 text-gold-400"></i> contato@advocacia.com.br</p>
+            </div>
+            <div>
+                <p class="font-semibold text-white mb-3">Horário de Atendimento</p>
+                <p class="mb-1">Segunda a Sexta: 08:00 às 18:00</p>
+                <p class="text-xs text-slate-500 mt-4">
+                    Este site tem caráter meramente informativo e obedece às normas do Código de Ética e Disciplina da OAB.
+                </p>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto px-4 border-t border-slate-900 pt-6 text-center text-xs text-slate-600">
+            &copy; 2026 Dra. Maria Silva Advocacia. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- Botão Flutuante do WhatsApp -->
+    <a href="https://wa.me/5500000000000?text=Olá,%20gostaria%20de%20agendar%20uma%20consulta." 
+       target="_blank" 
+       aria-label="Contato no WhatsApp"
+       class="fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl hover:bg-emerald-400 hover:scale-110 transition z-50">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
