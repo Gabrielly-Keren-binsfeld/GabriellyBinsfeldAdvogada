@@ -245,7 +245,7 @@
         </div>
     </section>
 
-    <!-- Seção de Artigos / Informativos -->
+    <!-- Seção de Artigos / Informativos Dinâmica -->
     <section id="artigos" class="py-20 bg-slate-50 border-t border-slate-200">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -253,54 +253,9 @@
                 <p class="text-slate-600">Informativos atualizados sobre benefícios do INSS e direitos trabalhistas.</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Artigo 1 -->
-                <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
-                    <div class="p-6">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">INSS / Maternidade</span>
-                        <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
-                            Desempregada tem direito ao Salário Maternidade?
-                        </h3>
-                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">
-                            Descubra como o período de graça garante o recebimento do auxílio mesmo para mães fora do mercado formal.
-                        </p>
-                        <a href="https://wa.me/5549984331669?text=Gostaria%20de%20saber%20mais%20sobre%20Salário%20Maternidade%20para%20Desempregada" target="_blank" class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
-                            Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Artigo 2 -->
-                <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
-                    <div class="p-6">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">Auxílio-Acidente</span>
-                        <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
-                            Quem sofreu acidente de trabalho tem direito a indenização do INSS?
-                        </h3>
-                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">
-                            Entenda a diferença entre Auxílio-Doença e Auxílio-Acidente e receba o benefício acumulando com o salário.
-                        </p>
-                        <a href="https://wa.me/5549984331669?text=Gostaria%20de%20saber%20mais%20sobre%20Auxílio-Acidente" target="_blank" class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
-                            Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Artigo 3 -->
-                <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
-                    <div class="p-6">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">Aposentadoria</span>
-                        <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
-                            Como calcular a melhor regra de Aposentadoria?
-                        </h3>
-                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">
-                            Conheça as regras de transição e evite prejuízos ao solicitar sua aposentadoria junto ao INSS.
-                        </p>
-                        <a href="https://wa.me/5549984331669?text=Gostaria%20de%20saber%20mais%20sobre%20Cálculo%20de%20Aposentadoria" target="_blank" class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
-                            Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </article>
+            <div id="lista-artigos" class="grid md:grid-cols-3 gap-8">
+                <!-- Os artigos criados no Decap CMS serão inseridos aqui automaticamente -->
+                <p class="text-center col-span-3 text-slate-500">A carregar artigos...</p>
             </div>
         </div>
     </section>
@@ -343,6 +298,65 @@
        class="fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl hover:bg-emerald-400 hover:scale-110 transition z-50">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
+
+    <!-- Script do Leitor Automático de Artigos -->
+    <script>
+        async function carregarListaArtigos() {
+            const container = document.getElementById('lista-artigos');
+            try {
+                const res = await fetch('https://api.github.com/repos/josiasdasilveira/dragabriellybinsfeld/contents/content/artigos');
+                if (!res.ok) throw new Error();
+                const files = await res.json();
+
+                container.innerHTML = '';
+
+                for (const file of files) {
+                    if (file.name.endsWith('.md')) {
+                        const slug = file.name.replace('.md', '');
+                        const rawRes = await fetch(file.download_url);
+                        const text = await rawRes.text();
+
+                        const parts = text.split('---');
+                        const metadata = {};
+                        if (parts.length > 1) {
+                            parts[1].split('\n').forEach(line => {
+                                const [key, ...value] = line.split(':');
+                                if (key && value.length) {
+                                    metadata[key.trim()] = value.join(':').trim().replace(/^"(.*)"$/, '$1');
+                                }
+                            });
+                        }
+
+                        const card = `
+                            <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                                <div class="p-6">
+                                    <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">${metadata.categoria || 'INSS'}</span>
+                                    <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
+                                        ${metadata.title || 'Artigo'}
+                                    </h3>
+                                    <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
+                                        ${metadata.description || 'Clique abaixo para ler o artigo completo.'}
+                                    </p>
+                                </div>
+                                <div class="p-6 pt-0">
+                                    <a href="artigo.html?post=${slug}" class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
+                                        Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
+                                    </a>
+                                </div>
+                            </article>
+                        `;
+                        container.innerHTML += card;
+                    }
+                }
+                if (container.innerHTML === '') {
+                    container.innerHTML = '<p class="text-center col-span-3 text-slate-500">Nenhum artigo publicado recentemente.</p>';
+                }
+            } catch (e) {
+                container.innerHTML = '<p class="text-center col-span-3 text-slate-500">Nenhum artigo encontrado.</p>';
+            }
+        }
+        carregarListaArtigos();
+    </script>
 
     <!-- Netlify Identity Redirection Script -->
     <script>
