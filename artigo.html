@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artigo | Dra. Gabrielly Binsfeld</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' },
+                        gold: { 400: '#fbbf24', 500: '#d97706', 600: '#b45309' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-40 bg-navy-950/95 backdrop-blur border-b border-slate-800 text-white">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-serif text-xl font-bold tracking-wide text-gold-400 flex items-center gap-2">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>Dra. Gabrielly Binsfeld</span>
+            </a>
+            <a href="index.html#artigos" class="text-sm font-medium text-slate-300 hover:text-gold-400 transition">
+                <i class="fa-solid fa-arrow-left mr-1"></i> Voltar aos Artigos
+            </a>
+        </div>
+    </header>
+
+    <!-- Artigo Container -->
+    <main class="pt-32 pb-20 max-w-4xl mx-auto px-4">
+        <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm p-6 sm:p-10">
+            <span id="artigo-categoria" class="inline-block text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200 mb-4">INSS</span>
+            <h1 id="artigo-titulo" class="font-serif text-3xl sm:text-4xl font-bold text-navy-900 mb-4">A carregar artigo...</h1>
+            <p id="artigo-data" class="text-xs text-slate-400 mb-8 border-b border-slate-100 pb-4"></p>
+            
+            <img id="artigo-imagem" src="" alt="Capa do Artigo" class="w-full h-80 object-cover rounded-xl mb-8 hidden">
+
+            <div id="artigo-conteudo" class="prose max-w-none text-slate-700 leading-relaxed space-y-4">
+                <!-- Conteúdo formatado será injetado aqui -->
+            </div>
+
+            <!-- Chamada para Ação no Final -->
+            <div class="mt-12 pt-8 border-t border-slate-200 bg-slate-50 p-6 rounded-xl border text-center">
+                <h3 class="font-serif text-xl font-bold text-navy-900 mb-2">Ficou com alguma dúvida sobre este assunto?</h3>
+                <p class="text-slate-600 text-sm mb-6">Entre em contacto direto para analisar a sua situação com a Dra. Gabrielly Binsfeld.</p>
+                <a id="artigo-whatsapp" href="https://wa.me/5549984331669" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-3 rounded-xl transition">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Falar sobre o meu caso no WhatsApp
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <!-- Leitor do Markdown -->
+    <script>
+        async function carregarArtigo() {
+            const params = new URLSearchParams(window.location.search);
+            const slug = params.get('post');
+            
+            if (!slug) {
+                window.location.href = "index.html";
+                return;
+            }
+
+            try {
+                const res = await fetch(`/content/artigos/${slug}.md`);
+                if (!res.ok) throw new Error("Artigo não encontrado");
+                
+                const text = await res.text();
+                
+                // Separa o Frontmatter YAML do Conteúdo Markdown
+                const parts = text.split('---');
+                const frontmatter = parts[1];
+                const content = parts.slice(2).join('---');
+
+                const metadata = {};
+                frontmatter.split('\n').forEach(line => {
+                    const [key, ...value] = line.split(':');
+                    if (key && value.length) {
+                        metadata[key.trim()] = value.join(':').trim().replace(/^"(.*)"$/, '$1');
+                    }
+                });
+
+                document.getElementById('artigo-titulo').innerText = metadata.title || 'Artigo';
+                document.getElementById('artigo-categoria').innerText = metadata.categoria || 'INSS';
+                
+                if (metadata.date) {
+                    const dataObj = new Date(metadata.date);
+                    document.getElementById('artigo-data').innerText = `Publicado a ${dataObj.toLocaleDateString('pt-BR')}`;
+                }
+
+                if (metadata.thumbnail) {
+                    const img = document.getElementById('artigo-imagem');
+                    img.src = metadata.thumbnail;
+                    img.classList.remove('hidden');
+                }
+
+                document.getElementById('artigo-conteudo').innerHTML = marked.parse(content);
+                
+                const msgWa = encodeURIComponent(`Olá, Dra. Gabrielly. Li o artigo "${metadata.title}" e gostaria de mais orientações.`);
+                document.getElementById('artigo-whatsapp').href = `https://wa.me/5549984331669?text=${msgWa}`;
+
+            } catch (err) {
+                document.getElementById('artigo-titulo').innerText = "Artigo não encontrado";
+                document.getElementById('artigo-conteudo').innerText = "O artigo solicitado não pôde ser carregado.";
+            }
+        }
+
+        carregarArtigo();
+    </script>
+</body>
+</html>
