@@ -2,7 +2,7 @@
 title: Filho ou dependente com deficiência pode receber pensão por morte?
   Entenda como o INSS avalia a deficiência
 category: INSS
-date: 2026-10-15T11:21:00.000-03:00
+date: 2026-10-15T12:39:00.000-03:00
 image: /images/uploads/shutterstock_773093467-1024x683.jpg
 summary: >-
   A pensão por morte do INSS é um benefício destinado aos dependentes do
