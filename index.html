@@ -299,27 +299,36 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- Script de Gestão Dinâmica e Verificação de Ficheiros -->
+    <!-- Script de Gestão Dinâmica de Artigos via API do GitHub -->
     <script>
         async function verificarECarregarArtigos() {
             const container = document.getElementById('lista-artigos');
+            const repoUser = 'josiasdasilveira';
+            const repoName = 'dragabriellybinsfeld';
             
-            // Coloque aqui os nomes exatos dos ficheiros .md que estão atualmente na pasta content/artigos/ do seu GitHub.
-            // Se apagou todos os artigos, deixe esta lista vazia []. Se criar um novo, adicione o nome dele aqui.
-            const artigosAtivos = [
-                // "nome-do-artigo-exemplo"
-            ];
+            let files = [];
 
-            if (artigosAtivos.length === 0) {
+            try {
+                // Consulta dinamicamente a pasta content/artigos/ no seu repositório GitHub
+                const apiRes = await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents/content/artigos`);
+                if (apiRes.ok) {
+                    const data = await apiRes.json();
+                    files = data.filter(file => file.name.endsWith('.md'));
+                }
+            } catch (e) {
+                console.error("Erro ao buscar arquivos no GitHub:", e);
+            }
+
+            if (files.length === 0) {
                 container.innerHTML = '<p class="text-center col-span-3 text-slate-500">Nenhum artigo publicado no momento.</p>';
                 return;
             }
 
             let htmlContent = '';
 
-            for (const slug of artigosAtivos) {
+            for (const file of files) {
                 try {
-                    const res = await fetch(`content/artigos/${slug}.md`);
+                    const res = await fetch(file.download_url);
                     if (!res.ok) continue;
 
                     const text = await res.text();
@@ -334,6 +343,8 @@
                             }
                         });
                     }
+
+                    const slug = file.name.replace(/\.md$/, '');
 
                     htmlContent += `
                         <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
