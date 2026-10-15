@@ -1,20 +1,20 @@
 backend:
-  name: git-gateway
-  branch: main
+  name: github
+  repo: josiasdasilveira/Gabrielly-Binsfeld-Advogada
+  branch: principal
+  token: "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"
 
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
+media_folder: "imagens"
+public_folder: "/imagens"
 
 collections:
   - name: "artigos"
     label: "Artigos Jurídicos"
-    folder: "_artigos"
+    folder: "content/artigos"
     create: true
     slug: "{{slug}}"
     fields:
       - {label: "Título", name: "title", widget: "string"}
-      - {label: "Categoria", name: "category", widget: "string", default: "INSS"}
-      - {label: "Data de Publicação", name: "date", widget: "datetime"}
-      - {label: "Imagem de Capa", name: "image", widget: "image"}
-      - {label: "Resumo Simples", name: "summary", widget: "text"}
-      - {label: "Conteúdo Completo", name: "body", widget: "markdown"}
+      - {label: "Categoria", name: "categoria", widget: "string"}
+      - {label: "Descrição", name: "description", widget: "text"}
+      - {label: "Corpo do Artigo", name: "body", widget: "markdown"}
