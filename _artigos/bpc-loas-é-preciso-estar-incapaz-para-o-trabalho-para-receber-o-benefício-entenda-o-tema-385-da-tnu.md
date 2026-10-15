@@ -2,7 +2,7 @@
 title: "BPC/LOAS: é preciso estar incapaz para o trabalho para receber o
   benefício? Entenda o Tema 385 da TNU"
 category: AUXÍLIO
-date: 2026-10-15T11:45:00.000-03:00
+date: 2026-10-15T12:39:00.000-03:00
 image: /images/uploads/shutterstock_312242249-768x513.jpg
 summary: Uma dúvida bastante comum entre as pessoas que buscam o Benefício de
   Prestação Continuada (BPC/LOAS) é se, para ter direito ao benefício, a pessoa
