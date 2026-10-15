@@ -304,12 +304,11 @@
         async function verificarECarregarArtigos() {
             const container = document.getElementById('lista-artigos');
             const repoUser = 'josiasdasilveira';
-            const repoName = 'dragabriellybinsfeld';
+            const repoName = 'Gabrielly-Binsfeld-Advogada';
             
             let files = [];
 
             try {
-                // Consulta dinamicamente a pasta content/artigos/ no seu repositório GitHub
                 const apiRes = await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents/content/artigos`);
                 if (apiRes.ok) {
                     const data = await apiRes.json();
