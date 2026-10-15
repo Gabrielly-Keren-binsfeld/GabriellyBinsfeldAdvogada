@@ -2,7 +2,7 @@
 title: "BPC/LOAS: é preciso estar incapaz para o trabalho para receber o
   benefício? Entenda o Tema 385 da TNU"
 category: INSS
-date: 2026-10-15T14:50:00.000-03:00
+date: 2026-10-15T15:05:00.000-03:00
 image: /images/uploads/shutterstock_312242249-768x513.jpg
 summary: >-
   A pensão por morte do INSS é um benefício destinado aos dependentes do
