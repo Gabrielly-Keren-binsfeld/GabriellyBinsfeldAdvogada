@@ -6,6 +6,9 @@
     <title>Dra. Gabrielly Binsfeld | Advocacia Previdenciária & INSS em São Miguel do Oeste - SC</title>
     <meta name="description" content="Advocacia Previdenciária especializada em Salário Maternidade, Auxílio-Acidente, Auxílio-Doença e Aposentadorias em São Miguel do Oeste - SC e Atendimento Online.">
     
+    <!-- Favicon para evitar erro 404 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -253,9 +256,9 @@
                 <p class="text-slate-600">Informativos atualizados sobre benefícios do INSS e direitos previdenciários.</p>
             </div>
 
-            <!-- Grelha Dinâmica com Fallback Robusto -->
+            <!-- Grelha de Artigos -->
             <div id="lista-artigos" class="grid md:grid-cols-3 gap-8">
-                <!-- Artigo padrão direto (Garante exibição imediata caso o fetch falhe por restrição de CORS local ou caminho) -->
+                <!-- Artigo padrão -->
                 <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
                     <div class="p-6">
                         <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">INSS / BPC</span>
@@ -316,69 +319,6 @@
        class="fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl hover:bg-emerald-400 hover:scale-110 transition z-50">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
-
-    <!-- Script Robusto de Listagem de Artigos Publicados -->
-    <script>
-        async function carregarArtigos() {
-            const container = document.getElementById('lista-artigos');
-            
-            // Adicione aqui os nomes dos ficheiros .md criados na pasta content/artigos/ (sem a extensão .md)
-            const artigosAtivos = [
-                "bpc-loas",
-                "artigo" 
-            ];
-
-            let htmlContent = '';
-
-            for (const slug of artigosAtivos) {
-                try {
-                    const res = await fetch(`content/artigos/${slug}.md`);
-                    if (!res.ok) continue;
-
-                    const text = await res.text();
-                    const parts = text.split('---');
-                    const metadata = {};
-
-                    if (parts.length > 1) {
-                        parts[1].split('\n').forEach(line => {
-                            const [key, ...value] = line.split(':');
-                            if (key && value.length) {
-                                metadata[key.trim()] = value.join(':').trim().replace(/^"(.*)"$/, '$1');
-                            }
-                        });
-                    }
-
-                    htmlContent += `
-                        <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
-                            <div class="p-6">
-                                <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">${metadata.categoria || 'INSS'}</span>
-                                <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
-                                    ${metadata.title || 'Artigo'}
-                                </h3>
-                                <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
-                                    ${metadata.description || 'Clique abaixo para falar sobre este caso.'}
-                                </p>
-                            </div>
-                            <div class="p-6 pt-0">
-                                <a href="https://wa.me/5549984331669?text=Olá,%20Dra.%20Gabrielly.%20Vi%20o%20artigo%20sobre%20${encodeURIComponent(metadata.title || 'o tema')}%20e%20gostaria%20de%20tirar%20dúvidas." 
-                                   target="_blank" 
-                                   class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
-                                    Falar sobre este caso <i class="fa-solid fa-arrow-right text-xs"></i>
-                                </a>
-                            </div>
-                        </article>
-                    `;
-                } catch (e) {}
-            }
-
-            // Se encontrar artigos carregados via fetch, substitui o conteúdo; caso contrário mantém o padrão estático seguro
-            if (htmlContent !== '') {
-                container.innerHTML = htmlContent;
-            }
-        }
-
-        carregarArtigos();
-    </script>
 
     <!-- Netlify Identity Redirection Script -->
     <script>
