@@ -68,7 +68,7 @@
         </article>
     </main>
 
-    <!-- Leitor Inteligente de Markdown -->
+    <!-- Leitor Inteligente de Markdown com Tratamento de Ficheiros Cortados -->
     <script>
         async function carregarArtigo() {
             const params = new URLSearchParams(window.location.search);
@@ -79,22 +79,45 @@
                 return;
             }
 
-            // Lista flexível de nomes de ficheiros a testar para evitar erros quando o slug é cortado pelo CMS
+            // Limpa pontos extras ou extensão se já vierem no parâmetro
+            const baseSlug = slugParam.replace(/\.md$/, '').replace(/\.+$/, '');
+
+            // Lista inteligente de possíveis variações de nomes de ficheiros gerados pelo CMS
             const variantes = [
-                slugParam,
-                slugParam.replace(/\.$/, ''),
-                "filho-ou-dependente-com-deficiencia-pode-receber-pensao-por-m.",
-                "filho-ou-dependente-com-deficiencia-pode-receber-pensao-por-morte-entenda-como-o-inss-avalia-a-deficiencia"
+                `content/artigos/${baseSlug}.md`,
+                `content/artigos/${baseSlug}..md`,
+                `content/artigos/${baseSlug}...md`,
+                `content/artigos/${slugParam}.md`,
+                `content/artigos/${slugParam}`
             ];
 
             let text = null;
 
-            for (const s of variantes) {
+            for (const caminho of variantes) {
                 try {
-                    const res = await fetch(`content/artigos/${s}.md`);
+                    const res = await fetch(caminho);
                     if (res.ok) {
                         text = await res.text();
                         break;
+                    }
+                } catch (e) {}
+            }
+
+            // Se mesmo assim falhar, tenta listar a pasta via GitHub API para encontrar o ficheiro correspondente
+            if (!text) {
+                try {
+                    const apiRes = await fetch('https://api.github.com/repos/josiasdasilveira/dragabriellybinsfeld/contents/content/artigos');
+                    if (apiRes.ok) {
+                        const files = await apiRes.json();
+                        for (const file of files) {
+                            if (file.name.includes(baseSlug.substring(0, 30))) {
+                                const res = await fetch(file.download_url);
+                                if (res.ok) {
+                                    text = await res.text();
+                                    break;
+                                }
+                            }
+                        }
                     }
                 } catch (e) {}
             }
