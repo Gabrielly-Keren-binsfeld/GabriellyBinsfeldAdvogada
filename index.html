@@ -245,7 +245,7 @@
         </div>
     </section>
 
-    <!-- Seção de Artigos / Informativos -->
+    <!-- Seção de Artigos / Informativos Dinâmica -->
     <section id="artigos" class="py-20 bg-slate-50 border-t border-slate-200">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -254,23 +254,7 @@
             </div>
 
             <div id="lista-artigos" class="grid md:grid-cols-3 gap-8">
-                <!-- Artigo do INSS criado no Decap CMS -->
-                <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
-                    <div class="p-6">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">INSS</span>
-                        <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
-                            Filho ou dependente com deficiência pode receber pensão por morte? Entenda como o INSS avalia a deficiência
-                        </h3>
-                        <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
-                            A pensão por morte pode ser concedida aos filhos ou dependentes com deficiência intelectual, mental ou grave. Entenda as regras do INSS.
-                        </p>
-                    </div>
-                    <div class="p-6 pt-0">
-                        <a id="btn-ler-artigo" href="#" class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
-                            Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </article>
+                <p class="text-center col-span-3 text-slate-500">A carregar artigos...</p>
             </div>
         </div>
     </section>
@@ -314,30 +298,88 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- Localizador dinâmico de link do artigo -->
+    <!-- Script de Carregamento Automático de Artigos do Decap CMS -->
     <script>
-        async function vincularArtigo() {
+        async function carregarListaArtigosAutomatica() {
+            const container = document.getElementById('lista-artigos');
+            
             try {
-                // Tenta detectar o arquivo Markdown dentro da pasta do repositório
-                const slugsPossiveis = [
-                    "filho-ou-dependente-com-deficiencia-pode-receber-pensao-por-morte-entenda-como-o-inss-avalia-a-deficiencia",
-                    "filho-ou-dependente-com-deficiencia-pode-receber-pensao-por-morte"
-                ];
+                const githubApiRes = await fetch('https://api.github.com/repos/josiasdasilveira/dragabriellybinsfeld/contents/content/artigos');
+                
+                if (!githubApiRes.ok) {
+                    throw new Error('Erro ao listar repositório');
+                }
 
-                for (const slug of slugsPossiveis) {
-                    const res = await fetch(`content/artigos/${slug}.md`);
-                    if (res.ok) {
-                        document.getElementById('btn-ler-artigo').href = `artigo.html?post=${slug}`;
-                        return;
+                const files = await githubApiRes.json();
+                let HTMLContent = '';
+
+                for (const file of files) {
+                    if (file.name.endsWith('.md')) {
+                        const slug = file.name.replace('.md', '');
+                        const rawRes = await fetch(file.download_url);
+                        const text = await rawRes.text();
+
+                        const parts = text.split('---');
+                        const metadata = {};
+                        if (parts.length > 1) {
+                            parts[1].split('\n').forEach(line => {
+                                const [key, ...value] = line.split(':');
+                                if (key && value.length) {
+                                    metadata[key.trim()] = value.join(':').trim().replace(/^"(.*)"$/, '$1');
+                                }
+                            });
+                        }
+
+                        HTMLContent += `
+                            <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                                <div class="p-6">
+                                    <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">${metadata.categoria || 'INSS'}</span>
+                                    <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
+                                        ${metadata.title || 'Artigo'}
+                                    </h3>
+                                    <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
+                                        ${metadata.description || 'Clique abaixo para ler o artigo completo.'}
+                                    </p>
+                                </div>
+                                <div class="p-6 pt-0">
+                                    <a href="artigo.html?post=${slug}" class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
+                                        Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
+                                    </a>
+                                </div>
+                            </article>
+                        `;
                     }
                 }
+
+                if (HTMLContent !== '') {
+                    container.innerHTML = HTMLContent;
+                } else {
+                    container.innerHTML = '<p class="text-center col-span-3 text-slate-500">Nenhum artigo publicado recentemente.</p>';
+                }
             } catch (e) {
-                console.log("Mantendo link padrão");
+                // Fallback com o artigo atual caso a API pública do GitHub demore a responder
+                container.innerHTML = `
+                    <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div class="p-6">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">INSS</span>
+                            <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
+                                Filho ou dependente com deficiência pode receber pensão por morte? Entenda como o INSS avalia a deficiência
+                            </h3>
+                            <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
+                                A pensão por morte pode ser concedida aos filhos ou dependentes com deficiência intelectual, mental ou grave. Entenda as regras do INSS.
+                            </p>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <a href="artigo.html?post=filho-ou-dependente-com-deficiencia-pode-receber-pensao-por-m." class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
+                                Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </article>
+                `;
             }
-            // Fallback padrão caso precise
-            document.getElementById('btn-ler-artigo').href = `artigo.html?post=filho-ou-dependente-com-deficiencia-pode-receber-pensao-por-morte-entenda-como-o-inss-avalia-a-deficiencia`;
         }
-        vincularArtigo();
+
+        carregarListaArtigosAutomatica();
     </script>
 
     <!-- Netlify Identity Redirection Script -->
