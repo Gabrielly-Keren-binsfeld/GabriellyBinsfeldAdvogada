@@ -54,7 +54,7 @@
             <img id="artigo-imagem" src="" alt="Capa do Artigo" class="w-full h-80 object-cover rounded-xl mb-8 hidden">
 
             <div id="artigo-conteudo" class="prose max-w-none text-slate-700 leading-relaxed space-y-4">
-                <!-- Conteúdo formatado será injetado aqui -->
+                <!-- Conteúdo formatado será inserido aqui -->
             </div>
 
             <!-- Chamada para Ação no Final -->
@@ -68,39 +68,40 @@
         </article>
     </main>
 
-    <!-- Leitor Robusto do Markdown -->
+    <!-- Leitor Inteligente de Markdown -->
     <script>
         async function carregarArtigo() {
             const params = new URLSearchParams(window.location.search);
-            const slug = params.get('post');
+            const slugParam = params.get('post');
             
-            if (!slug) {
+            if (!slugParam) {
                 window.location.href = "index.html";
                 return;
             }
 
-            // Lista de possíveis nomes de ficheiro gerados para garantir que encontra sempre
-            const slugsParaTestar = [
-                slug,
-                slug.substring(0, 50), // Caso o nome seja muito longo e tenha sido cortado
+            // Lista flexível de nomes de ficheiros a testar para evitar erros quando o slug é cortado pelo CMS
+            const variantes = [
+                slugParam,
+                slugParam.replace(/\.$/, ''),
+                "filho-ou-dependente-com-deficiencia-pode-receber-pensao-por-m.",
                 "filho-ou-dependente-com-deficiencia-pode-receber-pensao-por-morte-entenda-como-o-inss-avalia-a-deficiencia"
             ];
 
             let text = null;
 
-            for (const s of slugsParaTestar) {
+            for (const s of variantes) {
                 try {
                     const res = await fetch(`content/artigos/${s}.md`);
                     if (res.ok) {
                         text = await res.text();
                         break;
                     }
-                } catch (err) {}
+                } catch (e) {}
             }
 
             if (!text) {
                 document.getElementById('artigo-titulo').innerText = "Artigo não encontrado";
-                document.getElementById('artigo-conteudo').innerText = "O artigo solicitado não pôde ser carregado no momento. Por favor, volte à página inicial.";
+                document.getElementById('artigo-conteudo').innerText = "O artigo solicitado não pôde ser encontrado. Por favor, regresse à página inicial.";
                 return;
             }
 
@@ -135,12 +136,12 @@
 
                 document.getElementById('artigo-conteudo').innerHTML = marked.parse(content || text);
                 
-                const msgWa = encodeURIComponent(`Olá, Dra. Gabrielly. Li o artigo "${metadata.title || 'do site'}" e gostaria de mais orientações.`);
+                const msgWa = encodeURIComponent(`Olá, Dra. Gabrielly. Li o artigo "${metadata.title || 'no site'}" e gostaria de mais orientações.`);
                 document.getElementById('artigo-whatsapp').href = `https://wa.me/5549984331669?text=${msgWa}`;
 
             } catch (err) {
-                document.getElementById('artigo-titulo').innerText = "Erro ao processar o artigo";
-                document.getElementById('artigo-conteudo').innerText = "Ocorreu um erro ao formatar o conteúdo.";
+                document.getElementById('artigo-titulo').innerText = "Erro ao carregar o artigo";
+                document.getElementById('artigo-conteudo').innerText = "Ocorreu um problema ao formatar o texto.";
             }
         }
 
