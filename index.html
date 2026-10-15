@@ -298,82 +298,94 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- Leitor Local de Artigos Markdown -->
+    <!-- Leitor Automático de Artigos do GitHub (100% Autónomo) -->
     <script>
-        async function carregarArtigosLocais() {
+        async function carregarArtigosAutomaticos() {
             const container = document.getElementById('lista-artigos');
             
-            // Slugs completos dos artigos presentes na pasta content/artigos/
-            const slugs = [
-                "bpc-loas-e-preciso-estar-inscrito-para-trabalho-para-receber-o-b...",
-                "filho-ou-dependente-com-deficiencia-pode-receber-pensao-por-m.."
-            ];
+            try {
+                // Consulta automática à API do GitHub para listar todos os ficheiros na pasta content/artigos
+                const apiRes = await fetch('https://api.github.com/repos/josiasdasilveira/dragabriellybinsfeld/contents/content/artigos');
+                if (!apiRes.ok) throw new Error('Erro ao aceder à API do GitHub');
 
-            let htmlContent = '';
+                const files = await apiRes.json();
+                let htmlContent = '';
 
-            for (const slug of slugs) {
-                const variantes = [
-                    `content/artigos/${slug}.md`,
-                    `content/artigos/${slug}`,
-                    `content/artigos/${slug.replace(/\.+$/, '')}.md`
-                ];
+                for (const file of files) {
+                    if (file.name.endsWith('.md')) {
+                        const slugUsado = file.name.replace('.md', '');
+                        
+                        try {
+                            const rawRes = await fetch(file.download_url);
+                            if (!rawRes.ok) continue;
 
-                let text = null;
-                let slugUsado = slug.replace('.md', '');
+                            const text = await rawRes.text();
+                            const parts = text.split('---');
+                            const metadata = {};
 
-                for (const caminho of variantes) {
-                    try {
-                        const res = await fetch(caminho);
-                        if (res.ok) {
-                            text = await res.text();
-                            slugUsado = caminho.replace('content/artigos/', '').replace('.md', '');
-                            break;
+                            if (parts.length > 1) {
+                                parts[1].split('\n').forEach(line => {
+                                    const [key, ...value] = line.split(':');
+                                    if (key && value.length) {
+                                        metadata[key.trim()] = value.join(':').trim().replace(/^"(.*)"$/, '$1');
+                                    }
+                                });
+                            }
+
+                            htmlContent += `
+                                <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                                    <div class="p-6">
+                                        <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">${metadata.categoria || 'INSS'}</span>
+                                        <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
+                                            ${metadata.title || 'Artigo'}
+                                        </h3>
+                                        <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
+                                            ${metadata.description || 'Clique abaixo para ler o artigo completo.'}
+                                        </p>
+                                    </div>
+                                    <div class="p-6 pt-0">
+                                        <a href="artigo.html?post=${slugUsado}" class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
+                                            Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
+                                        </a>
+                                    </div>
+                                </article>
+                            `;
+                        } catch (err) {
+                            console.error("Erro ao ler artigo individual:", err);
                         }
-                    } catch (err) {}
+                    }
                 }
 
-                if (!text) continue;
-
-                const parts = text.split('---');
-                const metadata = {};
-
-                if (parts.length > 1) {
-                    parts[1].split('\n').forEach(line => {
-                        const [key, ...value] = line.split(':');
-                        if (key && value.length) {
-                            metadata[key.trim()] = value.join(':').trim().replace(/^"(.*)"$/, '$1');
-                        }
-                    });
+                if (htmlContent !== '') {
+                    container.innerHTML = htmlContent;
+                } else {
+                    container.innerHTML = '<p class="text-center col-span-3 text-slate-500">Nenhum artigo encontrado.</p>';
                 }
 
-                htmlContent += `
+            } catch (e) {
+                // Fallback de segurança caso a API pública do GitHub atinja o limite temporário
+                container.innerHTML = `
                     <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
                         <div class="p-6">
-                            <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">${metadata.categoria || 'INSS'}</span>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">INSS</span>
                             <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
-                                ${metadata.title || 'Artigo'}
+                                Filho ou dependente com deficiência pode receber pensão por morte?
                             </h3>
                             <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
-                                ${metadata.description || 'Clique abaixo para ler o artigo completo.'}
+                                A pensão por morte pode ser concedida aos filhos ou dependentes com deficiência. Entenda as regras do INSS.
                             </p>
                         </div>
                         <div class="p-6 pt-0">
-                            <a href="artigo.html?post=${slugUsado}" class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
+                            <a href="artigo.html?post=filho-ou-dependente-com-deficiencia-pode-receber-pensao-por-m.." class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
                                 Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
                             </a>
                         </div>
                     </article>
                 `;
             }
-
-            if (htmlContent !== '') {
-                container.innerHTML = htmlContent;
-            } else {
-                container.innerHTML = '<p class="text-center col-span-3 text-slate-500">Nenhum artigo encontrado.</p>';
-            }
         }
 
-        carregarArtigosLocais();
+        carregarArtigosAutomaticos();
     </script>
 
     <!-- Netlify Identity Redirection Script -->
