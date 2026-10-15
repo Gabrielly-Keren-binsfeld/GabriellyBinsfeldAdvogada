@@ -305,7 +305,7 @@
             }
 
             // Pastas candidatas (usa a primeira que existir)
-            const pastas = ["content/artigos", "artigos"];
+            const pastas = ["content/artigos", "_artigos", "artigos"];
 
             const vazio = '<p class="text-center md:col-span-3 text-slate-500">Nenhum artigo publicado no momento.</p>';
 
@@ -329,15 +329,18 @@
             }
 
             async function listarArquivos() {
+                const todos = [];
                 for (const pasta of pastas) {
                     try {
                         const r = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${pasta}`);
                         if (!r.ok) continue;
                         const data = await r.json();
-                        if (Array.isArray(data)) return data.filter(f => f.name.toLowerCase().endsWith('.md'));
+                        if (Array.isArray(data)) {
+                            data.filter(f => f.name.toLowerCase().endsWith('.md')).forEach(f => todos.push(f));
+                        }
                     } catch (e) { /* tenta a próxima pasta */ }
                 }
-                return [];
+                return todos;
             }
 
             async function carregar() {
