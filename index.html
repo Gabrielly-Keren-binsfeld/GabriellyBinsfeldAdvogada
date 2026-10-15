@@ -256,27 +256,9 @@
                 <p class="text-slate-600">Informativos atualizados sobre benefícios do INSS e direitos previdenciários.</p>
             </div>
 
-            <!-- Grelha de Artigos -->
+            <!-- Grelha Dinâmica Sincronizada com o GitHub -->
             <div id="lista-artigos" class="grid md:grid-cols-3 gap-8">
-                <!-- Artigo padrão -->
-                <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
-                    <div class="p-6">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">INSS / BPC</span>
-                        <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
-                            BPC/LOAS: é preciso estar incapaz para o trabalho para receber o benefício? Entenda o tema 265 da TNU
-                        </h3>
-                        <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
-                            Análise detalhada sobre os requisitos do BPC/LOAS e o entendimento recente da TNU para concessão do benefício assistencial.
-                        </p>
-                    </div>
-                    <div class="p-6 pt-0">
-                        <a href="https://wa.me/5549984331669?text=Olá,%20Dra.%20Gabrielly.%20Vi%20o%20artigo%20sobre%20o%20BPC/LOAS%20e%20gostaria%20de%20tirar%20dúvidas." 
-                           target="_blank" 
-                           class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
-                            Falar sobre este caso <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </article>
+                <p class="text-center col-span-3 text-slate-500">A carregar artigos do repositório...</p>
             </div>
         </div>
     </section>
@@ -319,6 +301,90 @@
        class="fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl hover:bg-emerald-400 hover:scale-110 transition z-50">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
+
+    <!-- Script de Sincronização Dinâmica com a API do GitHub -->
+    <script>
+        async function carregarArtigosGitHub() {
+            const container = document.getElementById('lista-artigos');
+            const repoOwner = "josiasdasilveira";
+            const repoName = "Gabrielly-Binsfeld-Advogada";
+            const folderPath = "content/artigos";
+
+            try {
+                // Consulta os ficheiros na pasta do GitHub
+                const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${folderPath}`);
+                
+                if (!response.ok) {
+                    container.innerHTML = '<p class="text-center col-span-3 text-slate-500">Nenhum artigo publicado no momento.</p>';
+                    return;
+                }
+
+                const files = await response.json();
+                const mdFiles = files.filter(file => file.name.endsWith('.md'));
+
+                if (mdFiles.length === 0) {
+                    container.innerHTML = '<p class="text-center col-span-3 text-slate-500">Nenhum artigo publicado no momento.</p>';
+                    return;
+                }
+
+                let htmlContent = '';
+
+                for (const file of mdFiles) {
+                    try {
+                        const contentRes = await fetch(file.download_url);
+                        if (!contentRes.ok) continue;
+
+                        const text = await contentRes.text();
+                        const parts = text.split('---');
+                        const metadata = {};
+
+                        if (parts.length > 1) {
+                            parts[1].split('\n').forEach(line => {
+                                const [key, ...value] = line.split(':');
+                                if (key && value.length) {
+                                    metadata[key.trim()] = value.join(':').trim().replace(/^"(.*)"$/, '$1');
+                                }
+                            });
+                        }
+
+                        const titulo = metadata.title || file.name.replace('.md', '');
+                        const categoria = metadata.categoria || 'INSS';
+                        const descricao = metadata.description || 'Clique abaixo para tirar dúvidas sobre este tema diretamente no WhatsApp.';
+
+                        htmlContent += `
+                            <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                                <div class="p-6">
+                                    <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">${categoria}</span>
+                                    <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
+                                        ${titulo}
+                                    </h3>
+                                    <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
+                                        ${descricao}
+                                    </p>
+                                </div>
+                                <div class="p-6 pt-0">
+                                    <a href="https://wa.me/5549984331669?text=Olá,%20Dra.%20Gabrielly.%20Vi%20o%20artigo%20sobre%20${encodeURIComponent(titulo)}%20e%20gostaria%20de%20tirar%20dúvidas." 
+                                       target="_blank" 
+                                       class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
+                                        Falar sobre este caso <i class="fa-solid fa-arrow-right text-xs"></i>
+                                    </a>
+                                </div>
+                            </article>
+                        `;
+                    } catch (e) {
+                        console.error("Erro ao carregar artigo individual:", e);
+                    }
+                }
+
+                container.innerHTML = htmlContent !== '' ? htmlContent : '<p class="text-center col-span-3 text-slate-500">Nenhum artigo publicado no momento.</p>';
+            } catch (error) {
+                console.error("Erro ao carregar pasta do GitHub:", error);
+                container.innerHTML = '<p class="text-center col-span-3 text-slate-500">Nenhum artigo publicado no momento.</p>';
+            }
+        }
+
+        carregarArtigosGitHub();
+    </script>
 
     <!-- Netlify Identity Redirection Script -->
     <script>
