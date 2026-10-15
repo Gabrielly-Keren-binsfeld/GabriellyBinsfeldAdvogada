@@ -299,35 +299,27 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- Script de Gestão Dinâmica de Artigos via API do GitHub -->
+    <!-- Script de Listagem de Artigos -->
     <script>
-        async function verificarECarregarArtigos() {
+        async function carregarArtigos() {
             const container = document.getElementById('lista-artigos');
-            const repoUser = 'josiasdasilveira';
-            const repoName = 'Gabrielly-Binsfeld-Advogada';
             
-            let files = [];
+            // Adicione aqui o nome do arquivo .md do artigo publicado (sem a extensão .md)
+            // Exemplo: se o arquivo criado foi "salario-maternidade.md", coloque "salario-maternidade" na lista.
+            const artigosAtivos = [
+                "artigo" // Substitua ou adicione os nomes dos seus artigos aqui
+            ];
 
-            try {
-                const apiRes = await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents/content/artigos`);
-                if (apiRes.ok) {
-                    const data = await apiRes.json();
-                    files = data.filter(file => file.name.endsWith('.md'));
-                }
-            } catch (e) {
-                console.error("Erro ao buscar arquivos no GitHub:", e);
-            }
-
-            if (files.length === 0) {
+            if (artigosAtivos.length === 0) {
                 container.innerHTML = '<p class="text-center col-span-3 text-slate-500">Nenhum artigo publicado no momento.</p>';
                 return;
             }
 
             let htmlContent = '';
 
-            for (const file of files) {
+            for (const slug of artigosAtivos) {
                 try {
-                    const res = await fetch(file.download_url);
+                    const res = await fetch(`content/artigos/${slug}.md`);
                     if (!res.ok) continue;
 
                     const text = await res.text();
@@ -342,8 +334,6 @@
                             }
                         });
                     }
-
-                    const slug = file.name.replace(/\.md$/, '');
 
                     htmlContent += `
                         <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
@@ -369,7 +359,7 @@
             container.innerHTML = htmlContent !== '' ? htmlContent : '<p class="text-center col-span-3 text-slate-500">Nenhum artigo encontrado.</p>';
         }
 
-        verificarECarregarArtigos();
+        carregarArtigos();
     </script>
 
     <!-- Netlify Identity Redirection Script -->
