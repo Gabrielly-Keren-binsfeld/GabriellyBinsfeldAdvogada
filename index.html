@@ -253,8 +253,25 @@
                 <p class="text-slate-600">Informativos atualizados sobre benefícios do INSS e direitos trabalhistas.</p>
             </div>
 
+            <!-- Grelha de Artigos (Renderização Segura) -->
             <div id="lista-artigos" class="grid md:grid-cols-3 gap-8">
-                <p class="text-center col-span-3 text-slate-500">A carregar artigos...</p>
+                <!-- Artigo BPC/LOAS -->
+                <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">INSS</span>
+                        <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
+                            BPC/LOAS: é preciso ficar incapacitado para o trabalho para receber o benefício? Entenda o Tema 305 da TNU
+                        </h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
+                            Entenda os detalhes jurídicos e as exigências recentes sobre o Benefício de Prestação Continuada (BPC/LOAS) e o Tema 305 da TNU.
+                        </p>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="artigo.html?post=bpc-loas-e-preciso-ficar-incapacitado-para-o-trabalho-para-receber-o-b..." class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
+                            Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -297,32 +314,6 @@
        class="fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl hover:bg-emerald-400 hover:scale-110 transition z-50">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
-
-    <!-- Leitor Seguro e Direto de Artigos -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const container = document.getElementById('lista-artigos');
-            
-            container.innerHTML = `
-                <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
-                    <div class="p-6">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">INSS</span>
-                        <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
-                            BPC/LOAS: é preciso ficar incapacitado para o trabalho para receber o benefício? Entenda o Tema 305 da TNU
-                        </h3>
-                        <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
-                            Entenda os detalhes jurídicos e as exigências recentes sobre o Benefício de Prestação Continuada (BPC/LOAS) e o Tema 305 da TNU.
-                        </p>
-                    </div>
-                    <div class="p-6 pt-0">
-                        <a href="artigo.html?post=bpc-loas-e-preciso-ficar-incapacitado-para-o-trabalho-para-receber-o-b..." class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
-                            Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </article>
-            `;
-        });
-    </script>
 
     <!-- Netlify Identity Redirection Script -->
     <script>
