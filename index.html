@@ -303,54 +303,67 @@
         async function carregarArtigosLocais() {
             const container = document.getElementById('lista-artigos');
             
-            // Cole aqui os nomes dos ficheiros .md (sem a extensão) que estão na pasta content/artigos/
+            // Slugs completos dos artigos presentes na pasta content/artigos/
             const slugs = [
-                "filho-ou-dependente-com-deficiencia-pode-receber-pensao-por-m.",
-                // Exemplo para o novo artigo (substitua pelo nome real do ficheiro criado no GitHub):
-                // "nome-do-novo-artigo-criado-pelo-cms"
+                "bpc-loas-e-preciso-estar-inscrito-para-trabalho-para-receber-o-b...",
+                "filho-ou-dependente-com-deficiencia-pode-receber-pensao-por-m.."
             ];
 
             let htmlContent = '';
 
             for (const slug of slugs) {
-                try {
-                    const res = await fetch(`content/artigos/${slug}.md`);
-                    if (!res.ok) continue;
+                const variantes = [
+                    `content/artigos/${slug}.md`,
+                    `content/artigos/${slug}`,
+                    `content/artigos/${slug.replace(/\.+$/, '')}.md`
+                ];
 
-                    const text = await res.text();
-                    const parts = text.split('---');
-                    const metadata = {};
+                let text = null;
+                let slugUsado = slug.replace('.md', '');
 
-                    if (parts.length > 1) {
-                        parts[1].split('\n').forEach(line => {
-                            const [key, ...value] = line.split(':');
-                            if (key && value.length) {
-                                metadata[key.trim()] = value.join(':').trim().replace(/^"(.*)"$/, '$1');
-                            }
-                        });
-                    }
-
-                    htmlContent += `
-                        <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
-                            <div class="p-6">
-                                <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">${metadata.categoria || 'INSS'}</span>
-                                <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
-                                    ${metadata.title || 'Artigo'}
-                                </h3>
-                                <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
-                                    ${metadata.description || 'Clique abaixo para ler o artigo completo.'}
-                                </p>
-                            </div>
-                            <div class="p-6 pt-0">
-                                <a href="artigo.html?post=${slug}" class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
-                                    Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
-                                </a>
-                            </div>
-                        </article>
-                    `;
-                } catch (err) {
-                    console.error("Erro ao carregar artigo:", err);
+                for (const caminho of variantes) {
+                    try {
+                        const res = await fetch(caminho);
+                        if (res.ok) {
+                            text = await res.text();
+                            slugUsado = caminho.replace('content/artigos/', '').replace('.md', '');
+                            break;
+                        }
+                    } catch (err) {}
                 }
+
+                if (!text) continue;
+
+                const parts = text.split('---');
+                const metadata = {};
+
+                if (parts.length > 1) {
+                    parts[1].split('\n').forEach(line => {
+                        const [key, ...value] = line.split(':');
+                        if (key && value.length) {
+                            metadata[key.trim()] = value.join(':').trim().replace(/^"(.*)"$/, '$1');
+                        }
+                    });
+                }
+
+                htmlContent += `
+                    <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div class="p-6">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">${metadata.categoria || 'INSS'}</span>
+                            <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
+                                ${metadata.title || 'Artigo'}
+                            </h3>
+                            <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
+                                ${metadata.description || 'Clique abaixo para ler o artigo completo.'}
+                            </p>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <a href="artigo.html?post=${slugUsado}" class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
+                                Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </article>
+                `;
             }
 
             if (htmlContent !== '') {
