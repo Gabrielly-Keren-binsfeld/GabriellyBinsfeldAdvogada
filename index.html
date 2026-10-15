@@ -250,12 +250,30 @@
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <h2 class="font-serif text-3xl font-bold text-navy-900 mb-4">Artigos & Informativos Jurídicos</h2>
-                <p class="text-slate-600">Informativos atualizados sobre benefícios do INSS e direitos trabalhistas.</p>
+                <p class="text-slate-600">Informativos atualizados sobre benefícios do INSS e direitos previdenciários.</p>
             </div>
 
-            <!-- Grelha Dinâmica de Artigos -->
+            <!-- Grelha Dinâmica com Fallback Robusto -->
             <div id="lista-artigos" class="grid md:grid-cols-3 gap-8">
-                <p class="text-center col-span-3 text-slate-500">A carregar artigos...</p>
+                <!-- Artigo padrão direto (Garante exibição imediata caso o fetch falhe por restrição de CORS local ou caminho) -->
+                <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">INSS / BPC</span>
+                        <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">
+                            BPC/LOAS: é preciso estar incapaz para o trabalho para receber o benefício? Entenda o tema 265 da TNU
+                        </h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
+                            Análise detalhada sobre os requisitos do BPC/LOAS e o entendimento recente da TNU para concessão do benefício assistencial.
+                        </p>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://wa.me/5549984331669?text=Olá,%20Dra.%20Gabrielly.%20Vi%20o%20artigo%20sobre%20o%20BPC/LOAS%20e%20gostaria%20de%20tirar%20dúvidas." 
+                           target="_blank" 
+                           class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
+                            Falar sobre este caso <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -299,21 +317,16 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- Script de Listagem Direta de Artigos Publicados -->
+    <!-- Script Robusto de Listagem de Artigos Publicados -->
     <script>
         async function carregarArtigos() {
             const container = document.getElementById('lista-artigos');
             
-            // Lista dos slugs (nomes dos ficheiros .md sem extensão) publicados na pasta content/artigos/
-            // Sempre que criar um novo artigo pelo Netlify CMS, basta adicionar o nome do ficheiro aqui.
+            // Adicione aqui os nomes dos ficheiros .md criados na pasta content/artigos/ (sem a extensão .md)
             const artigosAtivos = [
-                "artigo" // Adicione aqui novos slugs conforme publicar (ex: "salario-maternidade")
+                "bpc-loas",
+                "artigo" 
             ];
-
-            if (artigosAtivos.length === 0) {
-                container.innerHTML = '<p class="text-center col-span-3 text-slate-500">Nenhum artigo publicado no momento.</p>';
-                return;
-            }
 
             let htmlContent = '';
 
@@ -343,12 +356,14 @@
                                     ${metadata.title || 'Artigo'}
                                 </h3>
                                 <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">
-                                    ${metadata.description || 'Clique abaixo para ler o artigo completo.'}
+                                    ${metadata.description || 'Clique abaixo para falar sobre este caso.'}
                                 </p>
                             </div>
                             <div class="p-6 pt-0">
-                                <a href="artigo.html?post=${slug}" class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
-                                    Saber mais <i class="fa-solid fa-arrow-right text-xs"></i>
+                                <a href="https://wa.me/5549984331669?text=Olá,%20Dra.%20Gabrielly.%20Vi%20o%20artigo%20sobre%20${encodeURIComponent(metadata.title || 'o tema')}%20e%20gostaria%20de%20tirar%20dúvidas." 
+                                   target="_blank" 
+                                   class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
+                                    Falar sobre este caso <i class="fa-solid fa-arrow-right text-xs"></i>
                                 </a>
                             </div>
                         </article>
@@ -356,7 +371,10 @@
                 } catch (e) {}
             }
 
-            container.innerHTML = htmlContent !== '' ? htmlContent : '<p class="text-center col-span-3 text-slate-500">Nenhum artigo encontrado.</p>';
+            // Se encontrar artigos carregados via fetch, substitui o conteúdo; caso contrário mantém o padrão estático seguro
+            if (htmlContent !== '') {
+                container.innerHTML = htmlContent;
+            }
         }
 
         carregarArtigos();
