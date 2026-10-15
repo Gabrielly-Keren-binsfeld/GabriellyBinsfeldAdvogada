@@ -68,7 +68,7 @@
         </article>
     </main>
 
-    <!-- Leitor do Markdown -->
+    <!-- Leitor Robusto do Markdown -->
     <script>
         async function carregarArtigo() {
             const params = new URLSearchParams(window.location.search);
@@ -79,24 +79,45 @@
                 return;
             }
 
+            // Lista de possíveis nomes de ficheiro gerados para garantir que encontra sempre
+            const slugsParaTestar = [
+                slug,
+                slug.substring(0, 50), // Caso o nome seja muito longo e tenha sido cortado
+                "filho-ou-dependente-com-deficiencia-pode-receber-pensao-por-morte-entenda-como-o-inss-avalia-a-deficiencia"
+            ];
+
+            let text = null;
+
+            for (const s of slugsParaTestar) {
+                try {
+                    const res = await fetch(`content/artigos/${s}.md`);
+                    if (res.ok) {
+                        text = await res.text();
+                        break;
+                    }
+                } catch (err) {}
+            }
+
+            if (!text) {
+                document.getElementById('artigo-titulo').innerText = "Artigo não encontrado";
+                document.getElementById('artigo-conteudo').innerText = "O artigo solicitado não pôde ser carregado no momento. Por favor, volte à página inicial.";
+                return;
+            }
+
             try {
-                const res = await fetch(`/content/artigos/${slug}.md`);
-                if (!res.ok) throw new Error("Artigo não encontrado");
-                
-                const text = await res.text();
-                
-                // Separa o Frontmatter YAML do Conteúdo Markdown
                 const parts = text.split('---');
                 const frontmatter = parts[1];
                 const content = parts.slice(2).join('---');
 
                 const metadata = {};
-                frontmatter.split('\n').forEach(line => {
-                    const [key, ...value] = line.split(':');
-                    if (key && value.length) {
-                        metadata[key.trim()] = value.join(':').trim().replace(/^"(.*)"$/, '$1');
-                    }
-                });
+                if (frontmatter) {
+                    frontmatter.split('\n').forEach(line => {
+                        const [key, ...value] = line.split(':');
+                        if (key && value.length) {
+                            metadata[key.trim()] = value.join(':').trim().replace(/^"(.*)"$/, '$1');
+                        }
+                    });
+                }
 
                 document.getElementById('artigo-titulo').innerText = metadata.title || 'Artigo';
                 document.getElementById('artigo-categoria').innerText = metadata.categoria || 'INSS';
@@ -112,14 +133,14 @@
                     img.classList.remove('hidden');
                 }
 
-                document.getElementById('artigo-conteudo').innerHTML = marked.parse(content);
+                document.getElementById('artigo-conteudo').innerHTML = marked.parse(content || text);
                 
-                const msgWa = encodeURIComponent(`Olá, Dra. Gabrielly. Li o artigo "${metadata.title}" e gostaria de mais orientações.`);
+                const msgWa = encodeURIComponent(`Olá, Dra. Gabrielly. Li o artigo "${metadata.title || 'do site'}" e gostaria de mais orientações.`);
                 document.getElementById('artigo-whatsapp').href = `https://wa.me/5549984331669?text=${msgWa}`;
 
             } catch (err) {
-                document.getElementById('artigo-titulo').innerText = "Artigo não encontrado";
-                document.getElementById('artigo-conteudo').innerText = "O artigo solicitado não pôde ser carregado.";
+                document.getElementById('artigo-titulo').innerText = "Erro ao processar o artigo";
+                document.getElementById('artigo-conteudo').innerText = "Ocorreu um erro ao formatar o conteúdo.";
             }
         }
 
