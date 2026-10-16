@@ -22,8 +22,15 @@
             theme: {
                 extend: {
                     colors: {
-                        navy: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' },
-                        gold: { 400: '#fbbf24', 500: '#d97706', 600: '#b45309' }
+                        navy: { 800: '#5a4b41', 900: '#423024', 950: '#4c3b2f' },
+                        gold: { 400: '#d19f47', 500: '#d19f47', 600: '#a97b2c' },
+                        wine: { 50: '#f6ebee', 200: '#e6c9d1', 500: '#9b4b5f', 600: '#853a4d', 700: '#6f2a3b' },
+                        sand: { 100: '#f4f2f0' },
+                        slate: {
+                            50: '#f9f7f6', 100: '#ebe6e0', 200: '#e0d9d1', 300: '#d3cbc2',
+                            400: '#b5aca3', 500: '#8f8178', 600: '#7e6f67', 700: '#5f524a',
+                            800: '#30231d', 900: '#30231d', 950: '#423024'
+                        }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -35,10 +42,10 @@
     </script>
 
     <style>
-        .conteudo { color: #334155; line-height: 1.8; font-size: 1.05rem; }
+        .conteudo { color: #5f524a; line-height: 1.8; font-size: 1.05rem; }
         .conteudo > * + * { margin-top: 1.1rem; }
         .conteudo h1, .conteudo h2, .conteudo h3, .conteudo h4 {
-            font-family: 'Playfair Display', serif; color: #0f172a; font-weight: 700; line-height: 1.3;
+            font-family: 'Playfair Display', serif; color: #30231d; font-weight: 700; line-height: 1.3;
         }
         .conteudo h1 { font-size: 1.9rem; margin-top: 2rem; }
         .conteudo h2 { font-size: 1.6rem; margin-top: 2rem; }
@@ -46,14 +53,14 @@
         .conteudo ul { list-style: disc; padding-left: 1.5rem; }
         .conteudo ol { list-style: decimal; padding-left: 1.5rem; }
         .conteudo li + li { margin-top: .35rem; }
-        .conteudo a { color: #b45309; text-decoration: underline; }
-        .conteudo strong { color: #0f172a; }
-        .conteudo blockquote { border-left: 4px solid #d97706; background: #f8fafc; padding: .75rem 1rem; font-style: italic; }
+        .conteudo a { color: #6f2a3b; text-decoration: underline; }
+        .conteudo strong { color: #30231d; }
+        .conteudo blockquote { border-left: 4px solid #d19f47; background: #f9f7f6; padding: .75rem 1rem; font-style: italic; }
         .conteudo img { max-width: 100%; height: auto; border-radius: .75rem; }
         .conteudo table { width: 100%; border-collapse: collapse; display: block; overflow-x: auto; }
-        .conteudo th, .conteudo td { border: 1px solid #e2e8f0; padding: .5rem .75rem; text-align: left; }
-        .conteudo th { background: #f1f5f9; }
-        .conteudo hr { border-color: #e2e8f0; margin: 2rem 0; }
+        .conteudo th, .conteudo td { border: 1px solid #e0d9d1; padding: .5rem .75rem; text-align: left; }
+        .conteudo th { background: #ebe6e0; }
+        .conteudo hr { border-color: #e0d9d1; margin: 2rem 0; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
@@ -80,7 +87,7 @@
                 <i class="fa-solid fa-arrow-left text-xs"></i> Voltar para os artigos
             </a>
 
-            <article id="artigo" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-10">
+            <article id="artigo" class="bg-sand-100 rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-10">
                 <p class="text-slate-500">Carregando artigo...</p>
             </article>
 
@@ -88,7 +95,7 @@
                 <p class="font-serif text-xl font-bold mb-2">Ficou com dúvidas sobre o seu caso?</p>
                 <p class="text-slate-300 text-sm mb-5">Cada situação é única. Converse com a Dra. Gabrielly e receba uma orientação sobre o seu benefício.</p>
                 <a id="cta-link" href="#" target="_blank" rel="noopener"
-                   class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-3 rounded-xl inline-flex items-center gap-3 transition">
+                   class="bg-wine-500 hover:bg-wine-600 text-white font-semibold px-6 py-3 rounded-xl inline-flex items-center gap-3 transition">
                     <i class="fa-brands fa-whatsapp text-xl"></i> Falar com a Dra. Gabrielly
                 </a>
             </div>
@@ -171,7 +178,7 @@
                     if (desc && meta.description) desc.setAttribute('content', meta.description);
 
                     box.innerHTML = `
-                        <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">${esc(categoria)}</span>
+                        <span class="text-xs font-semibold uppercase tracking-wider text-wine-700 bg-wine-50 px-3 py-1 rounded-full border border-wine-200">${esc(categoria)}</span>
                         <h1 class="font-serif text-3xl sm:text-4xl font-bold text-navy-900 mt-5 mb-3 leading-tight">${esc(titulo)}</h1>
                         ${data ? `<p class="text-sm text-slate-500 mb-6">${esc(data)} &middot; Por Dra. Gabrielly Binsfeld</p>` : '<div class="mb-6"></div>'}
                         <div class="conteudo">${html}</div>
