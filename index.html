@@ -27,8 +27,15 @@
             theme: {
                 extend: {
                     colors: {
-                        navy: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' },
-                        gold: { 400: '#fbbf24', 500: '#d97706', 600: '#b45309' }
+                        navy: { 800: '#5a4b41', 900: '#423024', 950: '#4c3b2f' },
+                        gold: { 400: '#d19f47', 500: '#d19f47', 600: '#a97b2c' },
+                        wine: { 50: '#f6ebee', 200: '#e6c9d1', 500: '#9b4b5f', 600: '#853a4d', 700: '#6f2a3b' },
+                        sand: { 100: '#f4f2f0' },
+                        slate: {
+                            50: '#f9f7f6', 100: '#ebe6e0', 200: '#e0d9d1', 300: '#d3cbc2',
+                            400: '#b5aca3', 500: '#8f8178', 600: '#7e6f67', 700: '#5f524a',
+                            800: '#30231d', 900: '#30231d', 950: '#423024'
+                        }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -84,7 +91,7 @@
                 <div class="flex flex-col sm:flex-row gap-4">
                     <a href="https://wa.me/5549984331669?text=Olá,%20Dra.%20Gabrielly.%20Preciso%20de%20orientação%20sobre%20meu%20benefício."
                        target="_blank" rel="noopener"
-                       class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-4 rounded-xl text-center shadow-lg hover:shadow-emerald-900/40 transition flex items-center justify-center gap-3">
+                       class="bg-wine-500 hover:bg-wine-600 text-white font-semibold px-6 py-4 rounded-xl text-center shadow-lg hover:shadow-black/30 transition flex items-center justify-center gap-3">
                         <i class="fa-brands fa-whatsapp text-2xl"></i>
                         <span>Analisar Meu Caso no WhatsApp</span>
                     </a>
@@ -117,7 +124,7 @@
     </section>
 
     <!-- Áreas de Atuação -->
-    <section id="atuacao" class="py-20 bg-slate-100">
+    <section id="atuacao" class="py-20 bg-slate-50">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <h2 class="font-serif text-3xl font-bold text-navy-900 mb-4">Especialidades Previdenciárias & Jurídicas</h2>
@@ -125,8 +132,8 @@
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
-                    <div class="w-12 h-12 bg-navy-900 text-gold-400 rounded-xl flex items-center justify-center text-xl mb-4">
+                <div class="bg-sand-100 p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-[#e6ddde] text-wine-700 rounded-xl flex items-center justify-center text-xl mb-4">
                         <i class="fa-solid fa-baby"></i>
                     </div>
                     <h3 class="font-serif text-xl font-bold text-navy-900 mb-2">Salário Maternidade</h3>
@@ -139,8 +146,8 @@
                     </a>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
-                    <div class="w-12 h-12 bg-navy-900 text-gold-400 rounded-xl flex items-center justify-center text-xl mb-4">
+                <div class="bg-sand-100 p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-[#e6ddde] text-wine-700 rounded-xl flex items-center justify-center text-xl mb-4">
                         <i class="fa-solid fa-user-injured"></i>
                     </div>
                     <h3 class="font-serif text-xl font-bold text-navy-900 mb-2">Auxílio-Acidente</h3>
@@ -153,8 +160,8 @@
                     </a>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
-                    <div class="w-12 h-12 bg-navy-900 text-gold-400 rounded-xl flex items-center justify-center text-xl mb-4">
+                <div class="bg-sand-100 p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-[#e6ddde] text-wine-700 rounded-xl flex items-center justify-center text-xl mb-4">
                         <i class="fa-solid fa-notes-medical"></i>
                     </div>
                     <h3 class="font-serif text-xl font-bold text-navy-900 mb-2">Auxílio-Doença / BPC</h3>
@@ -167,8 +174,8 @@
                     </a>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
-                    <div class="w-12 h-12 bg-navy-900 text-gold-400 rounded-xl flex items-center justify-center text-xl mb-4">
+                <div class="bg-sand-100 p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-[#e6ddde] text-wine-700 rounded-xl flex items-center justify-center text-xl mb-4">
                         <i class="fa-solid fa-person-cane"></i>
                     </div>
                     <h3 class="font-serif text-xl font-bold text-navy-900 mb-2">Aposentadorias</h3>
@@ -185,7 +192,7 @@
     </section>
 
     <!-- Sobre -->
-    <section id="sobre" class="py-20 bg-white">
+    <section id="sobre" class="py-20 bg-slate-100">
         <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
             <div>
                 <h2 class="font-serif text-3xl font-bold text-navy-900 mb-6">Compromisso com a Justiça Previdenciária</h2>
@@ -197,28 +204,28 @@
                 </p>
 
                 <div class="flex flex-wrap items-center gap-3 mb-8">
-                    <a href="https://instagram.com/gabriellybinsfeld.prev?psln=MWMzYzh5cndmdmlmMA%3D%3D" target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-800 text-sm font-semibold transition">
-                        <i class="fa-brands fa-instagram text-pink-600 text-lg"></i> Instagram
+                    <a href="https://instagram.com/gabriellybinsfeld.prev?psln=MWMzYzh5cndmdmlmMA%3D%3D" target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-white rounded-lg text-slate-800 text-sm font-semibold transition">
+                        <i class="fa-brands fa-instagram text-wine-500 text-lg"></i> Instagram
                     </a>
-                    <a href="https://tiktok.com/@gabriellybinsfeld.adv" target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-800 text-sm font-semibold transition">
+                    <a href="https://tiktok.com/@gabriellybinsfeld.adv" target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-white rounded-lg text-slate-800 text-sm font-semibold transition">
                         <i class="fa-brands fa-tiktok text-black text-lg"></i> @gabriellybinsfeld.adv
                     </a>
-                    <a href="https://tiktok.com/@gabriellybinsfeld.inss" target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-800 text-sm font-semibold transition">
+                    <a href="https://tiktok.com/@gabriellybinsfeld.inss" target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-white rounded-lg text-slate-800 text-sm font-semibold transition">
                         <i class="fa-brands fa-tiktok text-black text-lg"></i> @gabriellybinsfeld.inss
                     </a>
                 </div>
 
                 <ul class="space-y-3 mb-8">
                     <li class="flex items-center gap-3 text-slate-700 font-medium">
-                        <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                        <i class="fa-solid fa-circle-check text-wine-700"></i>
                         Atendimento humanizado e focado em soluções ágeis
                     </li>
                     <li class="flex items-center gap-3 text-slate-700 font-medium">
-                        <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                        <i class="fa-solid fa-circle-check text-wine-700"></i>
                         Análise criteriosa de documentação médica e contribuições
                     </li>
                     <li class="flex items-center gap-3 text-slate-700 font-medium">
-                        <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                        <i class="fa-solid fa-circle-check text-wine-700"></i>
                         Respeito rigoroso ao Código de Ética e Disciplina da OAB
                     </li>
                 </ul>
@@ -372,9 +379,9 @@
                     artigos.sort((a, b) => (b.data || '').localeCompare(a.data || ''));
 
                     container.innerHTML = artigos.map(a => `
-                        <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <article class="bg-sand-100 rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
                             <div class="p-6">
-                                <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">${esc(a.categoria)}</span>
+                                <span class="text-xs font-semibold uppercase tracking-wider text-wine-700 bg-wine-50 px-3 py-1 rounded-full border border-wine-200">${esc(a.categoria)}</span>
                                 <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">${esc(a.titulo)}</h3>
                                 <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">${esc(a.descricao)}</p>
                             </div>
