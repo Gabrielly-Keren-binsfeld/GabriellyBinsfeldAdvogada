@@ -355,6 +355,7 @@
                             if (!res.ok) continue;
                             const meta = lerFrontmatter(await res.text());
                             artigos.push({
+                                path: file.path,
                                 titulo: meta.title || file.name.replace(/\.md$/i, ''),
                                 categoria: meta.categoria || 'INSS',
                                 descricao: meta.description || 'Clique abaixo para tirar dúvidas sobre este tema diretamente no WhatsApp.',
@@ -377,11 +378,15 @@
                                 <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">${esc(a.titulo)}</h3>
                                 <p class="text-slate-600 text-sm mb-4 leading-relaxed line-clamp-3">${esc(a.descricao)}</p>
                             </div>
-                            <div class="p-6 pt-0">
+                            <div class="p-6 pt-0 flex flex-col gap-3">
+                                <a href="artigo.html?f=${encodeURIComponent(a.path)}"
+                                   class="bg-navy-900 hover:bg-navy-800 text-white font-semibold text-sm px-4 py-2 rounded-lg text-center transition inline-flex items-center justify-center gap-2">
+                                    Ler artigo completo <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </a>
                                 <a href="https://wa.me/5549984331669?text=${encodeURIComponent('Olá, Dra. Gabrielly. Vi o artigo sobre ' + a.titulo + ' e gostaria de tirar dúvidas.')}"
                                    target="_blank" rel="noopener"
                                    class="text-gold-600 font-semibold text-sm hover:underline inline-flex items-center gap-1">
-                                    Falar sobre este caso <i class="fa-solid fa-arrow-right text-xs"></i>
+                                    <i class="fa-brands fa-whatsapp"></i> Falar sobre este caso
                                 </a>
                             </div>
                         </article>
