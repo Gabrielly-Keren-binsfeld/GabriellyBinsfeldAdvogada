@@ -1,8 +1,8 @@
 ---
 title: Você sabia que o INSS pode ser obrigado a fornecer próteses e órteses?
 category: INSS
-date: 2026-10-16T08:24:00.000-03:00
-image: /images/uploads/shutterstock_2060885348-300x200.jpg
+date: 2026-10-16T22:52:00.000-03:00
+image: /images/uploads/shutterstock_312242249-768x513.jpg
 summary: "Quando se fala em INSS, a maioria das pessoas pensa em aposentadoria,
   auxílio por incapacidade ou pensão por morte. "
 ---
