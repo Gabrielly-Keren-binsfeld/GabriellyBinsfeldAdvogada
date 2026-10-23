@@ -263,7 +263,7 @@
                 As avaliações são feitas pelas próprias pessoas atendidas, diretamente no perfil da Dra. Gabrielly no Google.
             </p>
 
-            <!-- Lista de avaliações dinâmica sem a classe hidden -->
+            <!-- Lista de avaliações dinâmica -->
             <div id="lista-avaliacoes" class="grid md:grid-cols-3 gap-6 mb-10 text-left"></div>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -353,7 +353,6 @@
                 return meta;
             }
 
-            // Tratamento completo de acentos e maiúsculas/minúsculas para identificar avaliações
             function ehAvaliacao(meta) {
                 const cat = String(meta.categoria || meta.category || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
                 return cat.includes('avalia') || cat.includes('depoiment');
@@ -392,16 +391,17 @@
                 box.style.display = 'grid';
                 lista.sort((a, b) => (b.data || '').localeCompare(a.data || ''));
                 box.innerHTML = lista.slice(0, 3).map(a => `
-                    <article class="bg-sand-100 rounded-2xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm">
+                    <a href="https://maps.app.goo.gl/Vpys6v2R3usUzJFv8" target="_blank" rel="noopener"
+                       class="bg-sand-100 rounded-2xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm hover:border-gold-500 transition group block">
                         <div>
                             ${estrelas(a.nota)}
                             <p class="text-slate-600 text-sm leading-relaxed line-clamp-6">${esc(a.texto)}</p>
                         </div>
-                        <p class="text-xs text-slate-500 mt-5">
-                            <span class="font-semibold text-navy-900">${esc(a.autor)}</span>
-                            &middot; avaliação no Google${mesAno(a.data) ? ' &middot; ' + esc(mesAno(a.data)) : ''}
-                        </p>
-                    </article>
+                        <div class="mt-5 pt-3 border-t border-slate-200/60 flex items-center justify-between text-xs">
+                            <span class="font-semibold text-navy-900">${esc(a.autor)}${mesAno(a.data) ? ' &middot; ' + esc(mesAno(a.data)) : ''}</span>
+                            <span class="text-gold-600 font-medium group-hover:underline inline-flex items-center gap-1">Ver no Google <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></span>
+                        </div>
+                    </a>
                 `).join('');
             }
 
