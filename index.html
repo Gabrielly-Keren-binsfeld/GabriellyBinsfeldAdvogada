@@ -263,7 +263,7 @@
                 As avaliações são feitas pelas próprias pessoas atendidas, diretamente no perfil da Dra. Gabrielly no Google.
             </p>
 
-            <!-- Avaliações cadastradas no painel (categoria "Avaliação") -->
+            <!-- Avaliações cadastradas no painel (categoria "Avaliação" ou "Avaliações") -->
             <div id="lista-avaliacoes" class="hidden"></div>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -323,9 +323,6 @@
         (function () {
             const container = document.getElementById('lista-artigos');
 
-            // Detecta dono e repositório automaticamente quando o site está no GitHub Pages.
-            // Ex.: gabrielly-keren-binsfeld.github.io/GabriellyBinsfeldAdvogada/
-            //  -> dono: gabrielly-keren-binsfeld | repo: GabriellyBinsfeldAdvogada
             let repoOwner = "Gabrielly-Keren-binsfeld";
             let repoName = "GabriellyBinsfeldAdvogada";
             if (location.hostname.endsWith('.github.io')) {
@@ -334,9 +331,7 @@
                 if (seg && !seg.endsWith('.html')) repoName = seg;
             }
 
-            // Pastas candidatas (usa a primeira que existir)
             const pastas = ["content/artigos", "_artigos", "artigos"];
-
             const vazio = '<p class="text-center md:col-span-3 text-slate-500">Nenhum artigo publicado no momento.</p>';
 
             function esc(s) {
@@ -358,13 +353,12 @@
                 return meta;
             }
 
-            // Itens com categoria "Avaliação", "Avaliações" ou "Depoimento" são avaliações, não artigos
+            // Identifica se a categoria é avaliação, avaliações ou depoimento
             function ehAvaliacao(meta) {
                 const c = String(meta.categoria || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
-                return c.indexOf('avalia') === 0 || c.indexOf('depoiment') === 0;
+                return c.includes('avalia') || c.includes('depoiment');
             }
 
-            // Texto do corpo do arquivo, sem o cabeçalho e sem marcações do Markdown
             function lerCorpo(texto) {
                 return texto.replace(/\r/g, '')
                     .replace(/^---\n[\s\S]*?\n---\n?/, '')
@@ -375,8 +369,7 @@
             }
 
             function estrelas(n) {
-                n = Math.max(0, Math.min(5, Math.round(Number(n) || 0)));
-                if (!n) return '';
+                n = Math.max(1, Math.min(5, Math.round(Number(n) || 5)));
                 let h = '';
                 for (let i = 1; i <= 5; i++) {
                     h += i <= n ? '<i class="fa-solid fa-star text-gold-500"></i>' : '<i class="fa-regular fa-star text-slate-400"></i>';
@@ -436,15 +429,17 @@
                             if (!res.ok) continue;
                             const texto = await res.text();
                             const meta = lerFrontmatter(texto);
+                            
                             if (ehAvaliacao(meta)) {
                                 avaliacoes.push({
                                     autor: meta.title || 'Cliente',
-                                    nota: meta.nota || '',
+                                    nota: meta.nota || 5,
                                     texto: meta.description || lerCorpo(texto),
                                     data: meta.date || ''
                                 });
                                 continue;
                             }
+
                             artigos.push({
                                 path: file.path,
                                 titulo: meta.title || file.name.replace(/\.md$/i, ''),
@@ -461,7 +456,6 @@
 
                     if (!artigos.length) { container.innerHTML = vazio; return; }
 
-                    // Mais recentes primeiro (quando houver data)
                     artigos.sort((a, b) => (b.data || '').localeCompare(a.data || ''));
 
                     container.innerHTML = artigos.map(a => `
