@@ -358,10 +358,10 @@
                 return meta;
             }
 
-            // Itens com categoria "Avaliação" são avaliações, não artigos
+            // Itens com categoria "Avaliação", "Avaliações" ou "Depoimento" são avaliações, não artigos
             function ehAvaliacao(meta) {
                 const c = String(meta.categoria || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
-                return c.indexOf('avaliacao') === 0;
+                return c.indexOf('avalia') === 0 || c.indexOf('depoiment') === 0;
             }
 
             // Texto do corpo do arquivo, sem o cabeçalho e sem marcações do Markdown
