@@ -1,8 +1,8 @@
 ---
 title: "Salário-Maternidade: Guia Completo e Atualizado "
 category: Salário - Maternidade
-date: 2026-10-26T17:38:00.000-03:00
-image: /images/uploads/gemini_generated_image_81krq881krq881kr.jpg
+date: 2026-10-26T17:55:00.000-03:00
+image: /images/uploads/pin-do-pinterest-maternidade-mãe-minimlaista-.png
 summary: >-
   O nascimento de um filho ou a chegada de uma criança por adoção é um momento
   de transformação. Para garantir que este período seja vivido com a segurança
