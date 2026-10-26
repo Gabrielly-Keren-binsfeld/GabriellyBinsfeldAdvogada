@@ -1,200 +1,77 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artigo | Dra. Gabrielly Binsfeld</title>
-    <meta name="description" content="Artigo jurídico previdenciário da Dra. Gabrielly Binsfeld, advogada em São Miguel do Oeste - SC.">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
-
+    <title>Artigos | Dra. Gabrielly Binsfeld</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-
-    <!-- Conversor de Markdown e sanitização -->
-    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: { 800: '#5a4b41', 900: '#423024', 950: '#4c3b2f' },
-                        gold: { 400: '#d19f47', 500: '#d19f47', 600: '#a97b2c' },
-                        wine: { 50: '#f6ebee', 200: '#e6c9d1', 500: '#9b4b5f', 600: '#853a4d', 700: '#6f2a3b' },
-                        sand: { 100: '#f4f2f0' },
-                        slate: {
-                            50: '#f9f7f6', 100: '#ebe6e0', 200: '#e0d9d1', 300: '#d3cbc2',
-                            400: '#b5aca3', 500: '#8f8178', 600: '#7e6f67', 700: '#5f524a',
-                            800: '#30231d', 900: '#30231d', 950: '#423024'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif']
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        .conteudo { color: #5f524a; line-height: 1.8; font-size: 1.05rem; }
-        .conteudo > * + * { margin-top: 1.1rem; }
-        .conteudo h1, .conteudo h2, .conteudo h3, .conteudo h4 {
-            font-family: 'Playfair Display', serif; color: #30231d; font-weight: 700; line-height: 1.3;
+        .blog-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070');
+            background-size: cover; background-position: center;
         }
-        .conteudo h1 { font-size: 1.9rem; margin-top: 2rem; }
-        .conteudo h2 { font-size: 1.6rem; margin-top: 2rem; }
-        .conteudo h3 { font-size: 1.3rem; margin-top: 1.6rem; }
-        .conteudo ul { list-style: disc; padding-left: 1.5rem; }
-        .conteudo ol { list-style: decimal; padding-left: 1.5rem; }
-        .conteudo li + li { margin-top: .35rem; }
-        .conteudo a { color: #6f2a3b; text-decoration: underline; }
-        .conteudo strong { color: #30231d; }
-        .conteudo blockquote { border-left: 4px solid #d19f47; background: #f9f7f6; padding: .75rem 1rem; font-style: italic; }
-        .conteudo img { max-width: 100%; height: auto; border-radius: .75rem; }
-        .conteudo table { width: 100%; border-collapse: collapse; display: block; overflow-x: auto; }
-        .conteudo th, .conteudo td { border: 1px solid #e0d9d1; padding: .5rem .75rem; text-align: left; }
-        .conteudo th { background: #ebe6e0; }
-        .conteudo hr { border-color: #e0d9d1; margin: 2rem 0; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
-
-    <header class="fixed w-full top-0 z-40 bg-navy-950/95 backdrop-blur border-b border-slate-800 text-white">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="index.html" class="font-serif text-xl font-bold tracking-wide text-gold-400 flex items-center gap-2">
-                <i class="fa-solid fa-scale-balanced"></i>
-                <span>Dra. Gabrielly Binsfeld</span>
-            </a>
-            <a href="https://wa.me/5549984331669?text=Olá,%20Dra.%20Gabrielly.%20Gostaria%20de%20agendar%20uma%20consulta."
-               target="_blank" rel="noopener"
-               class="bg-gold-500 hover:bg-gold-600 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm transition flex items-center gap-2">
-                <i class="fa-brands fa-whatsapp text-lg"></i>
-                <span class="hidden sm:inline">Atendimento WhatsApp</span>
-                <span class="sm:hidden">WhatsApp</span>
-            </a>
-        </div>
+<body class="bg-slate-50 antialiased">
+    <header class="bg-white border-b py-4 px-6 flex justify-between items-center sticky top-0 z-50">
+        <a href="index.html" class="font-serif text-xl font-bold text-stone-800">Dra. Gabrielly Binsfeld</a>
+        <a href="index.html" class="text-sm text-stone-500 hover:underline">Voltar ao Início</a>
     </header>
 
-    <main class="pt-28 pb-16">
-        <div class="max-w-3xl mx-auto px-4">
-            <a href="index.html#artigos" class="inline-flex items-center gap-2 text-sm font-semibold text-navy-900 hover:text-gold-600 mb-6">
-                <i class="fa-solid fa-arrow-left text-xs"></i> Voltar para os artigos
-            </a>
+    <section class="blog-header py-24 text-center text-white">
+        <h1 class="font-serif text-5xl font-bold mb-4">Artigos</h1>
+        <div class="w-20 h-1 bg-yellow-600 mx-auto"></div>
+    </section>
 
-            <article id="artigo" class="bg-sand-100 rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-10">
-                <p class="text-slate-500">Carregando artigo...</p>
-            </article>
-
-            <div id="cta" class="hidden mt-8 bg-navy-900 text-white rounded-2xl p-6 sm:p-8 text-center">
-                <p class="font-serif text-xl font-bold mb-2">Ficou com dúvidas sobre o seu caso?</p>
-                <p class="text-slate-300 text-sm mb-5">Cada situação é única. Converse com a Dra. Gabrielly e receba uma orientação sobre o seu benefício.</p>
-                <a id="cta-link" href="#" target="_blank" rel="noopener"
-                   class="bg-wine-500 hover:bg-wine-600 text-white font-semibold px-6 py-3 rounded-xl inline-flex items-center gap-3 transition">
-                    <i class="fa-brands fa-whatsapp text-xl"></i> Falar com a Dra. Gabrielly
-                </a>
-            </div>
+    <main class="max-w-7xl mx-auto px-4 py-12 flex flex-col md:flex-row gap-8">
+        <div id="lista-artigos" class="flex-1 grid md:grid-cols-2 gap-8">
+            <p class="text-center col-span-full py-10">Carregando informativos...</p>
         </div>
+        <aside class="w-full md:w-80">
+            <div class="bg-white p-6 rounded-xl border sticky top-24">
+                <h3 class="font-bold mb-4 border-b pb-2">Pesquisar</h3>
+                <input type="text" id="busca" placeholder="O que você procura?" class="w-full p-2 border rounded outline-none focus:ring-2 focus:ring-stone-400">
+            </div>
+        </aside>
     </main>
 
-    <footer class="bg-slate-950 text-slate-400 py-8 text-center text-xs">
-        <p class="mb-1">Dra. Gabrielly Binsfeld &middot; OAB/SC 66.948</p>
-        <p class="text-slate-600">&copy; 2026 Dra. Gabrielly Binsfeld Advocacia. Página mantida em observância ao Código de Ética e Disciplina da OAB.</p>
-    </footer>
-
     <script>
-        (function () {
-            const box = document.getElementById('artigo');
-
-            // Dono e repositório (detectados pelo endereço do GitHub Pages)
-            let repoOwner = "Gabrielly-Keren-binsfeld";
-            let repoName = "GabriellyBinsfeldAdvogada";
-            if (location.hostname.endsWith('.github.io')) {
-                repoOwner = location.hostname.split('.')[0];
-                const seg = location.pathname.split('/').filter(Boolean)[0];
-                if (seg && !seg.endsWith('.html')) repoName = seg;
+        (async function () {
+            const container = document.getElementById('lista-artigos');
+            let todos = [];
+            const r = await fetch(`https://api.github.com/repos/Gabrielly-Keren-binsfeld/GabriellyBinsfeldAdvogada/contents/content/artigos`);
+            const arquivos = await r.json();
+            for (let f of arquivos) {
+                if (!f.name.endsWith('.md')) continue;
+                const res = await fetch(f.download_url);
+                const texto = await res.text();
+                if (texto.includes('categoria: avalia')) continue;
+                const title = texto.match(/title:\s*"(.*)"/)?.[1] || f.name;
+                const desc = texto.match(/description:\s*"(.*)"/)?.[1] || "Leia mais...";
+                const img = texto.match(/imagem:\s*"(.*)"/)?.[1] || "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800";
+                todos.push({ title, desc, img, path: f.path });
             }
-
-            function esc(s) {
-                return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+            function render(l) {
+                container.innerHTML = l.map(a => `
+                    <article class="bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
+                        <img src="${a.img}" class="h-48 w-full object-cover">
+                        <div class="p-6 flex-1 flex flex-col">
+                            <h2 class="font-serif text-xl font-bold mb-3">${a.title}</h2>
+                            <p class="text-stone-600 text-sm mb-6 flex-1">${a.desc}</p>
+                            <a href="artigo.html?f=${encodeURIComponent(a.path)}" class="font-bold text-xs uppercase tracking-widest hover:underline">LEIA MAIS >></a>
+                        </div>
+                    </article>
+                `).join('');
             }
-
-            function erro(msg) {
-                box.innerHTML = '<p class="text-slate-600">' + msg + '</p>' +
-                    '<a href="index.html#artigos" class="inline-block mt-4 text-gold-600 font-semibold hover:underline">Voltar para os artigos</a>';
-            }
-
-            function separar(texto) {
-                texto = texto.replace(/\r/g, '');
-                const meta = {};
-                let corpo = texto;
-                const m = texto.match(/^---\n([\s\S]*?)\n---\n?/);
-                if (m) {
-                    corpo = texto.slice(m[0].length);
-                    m[1].split('\n').forEach(linha => {
-                        const i = linha.indexOf(':');
-                        if (i > 0) {
-                            const k = linha.slice(0, i).trim();
-                            const v = linha.slice(i + 1).trim().replace(/^["'](.*)["']$/, '$1');
-                            if (k) meta[k] = v;
-                        }
-                    });
-                }
-                return { meta, corpo };
-            }
-
-            function formatarData(d) {
-                if (!d) return '';
-                const dt = new Date(d);
-                if (isNaN(dt)) return '';
-                return dt.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
-            }
-
-            async function carregar() {
-                const caminho = new URLSearchParams(location.search).get('f');
-                if (!caminho || caminho.includes('..') || !/\.md$/i.test(caminho)) {
-                    return erro('Artigo não encontrado.');
-                }
-
-                try {
-                    const url = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${caminho.split('/').map(encodeURIComponent).join('/')}`;
-                    const res = await fetch(url, { cache: 'no-store' });
-                    if (!res.ok) return erro('Não foi possível carregar este artigo. Ele pode ter sido removido.');
-
-                    const { meta, corpo } = separar(await res.text());
-                    const titulo = meta.title || caminho.split('/').pop().replace(/\.md$/i, '');
-                    const categoria = meta.categoria || 'INSS';
-                    const data = formatarData(meta.date);
-
-                    const html = DOMPurify.sanitize(marked.parse(corpo));
-
-                    document.title = titulo + ' | Dra. Gabrielly Binsfeld';
-                    const desc = document.querySelector('meta[name="description"]');
-                    if (desc && meta.description) desc.setAttribute('content', meta.description);
-
-                    box.innerHTML = `
-                        <span class="text-xs font-semibold uppercase tracking-wider text-wine-700 bg-wine-50 px-3 py-1 rounded-full border border-wine-200">${esc(categoria)}</span>
-                        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-navy-900 mt-5 mb-3 leading-tight">${esc(titulo)}</h1>
-                        ${data ? `<p class="text-sm text-slate-500 mb-6">${esc(data)} &middot; Por Dra. Gabrielly Binsfeld</p>` : '<div class="mb-6"></div>'}
-                        <div class="conteudo">${html}</div>
-                    `;
-
-                    const msg = 'Olá, Dra. Gabrielly. Li o artigo sobre ' + titulo + ' e gostaria de tirar dúvidas.';
-                    document.getElementById('cta-link').href = 'https://wa.me/5549984331669?text=' + encodeURIComponent(msg);
-                    document.getElementById('cta').classList.remove('hidden');
-                } catch (e) {
-                    console.error(e);
-                    erro('Ocorreu um erro ao carregar o artigo. Tente novamente em instantes.');
-                }
-            }
-
-            carregar();
+            render(todos);
+            document.getElementById('busca').oninput = (e) => {
+                const t = e.target.value.toLowerCase();
+                render(todos.filter(a => a.title.toLowerCase().includes(t)));
+            };
         })();
     </script>
 </body>
 </html>
+````_
