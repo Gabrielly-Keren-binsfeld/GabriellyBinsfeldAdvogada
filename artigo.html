@@ -15,63 +15,96 @@
     </style>
 </head>
 <body class="bg-slate-50 antialiased">
-    <header class="bg-white border-b py-4 px-6 flex justify-between items-center sticky top-0 z-50">
+    <header class="bg-white border-b py-4 px-6 flex justify-between items-center sticky top-0 z-50 shadow-sm">
         <a href="index.html" class="font-serif text-xl font-bold text-stone-800">Dra. Gabrielly Binsfeld</a>
         <a href="index.html" class="text-sm text-stone-500 hover:underline">Voltar ao Início</a>
     </header>
 
     <section class="blog-header py-24 text-center text-white">
-        <h1 class="font-serif text-5xl font-bold mb-4">Artigos</h1>
+        <h1 class="font-serif text-5xl font-bold mb-4 uppercase tracking-widest">Artigos</h1>
         <div class="w-20 h-1 bg-yellow-600 mx-auto"></div>
     </section>
 
-    <main class="max-w-7xl mx-auto px-4 py-12 flex flex-col md:flex-row gap-8">
-        <div id="lista-artigos" class="flex-1 grid md:grid-cols-2 gap-8">
-            <p class="text-center col-span-full py-10">Carregando informativos...</p>
+    <main class="max-w-7xl mx-auto px-4 py-12 flex flex-col md:flex-row gap-12">
+        <!-- Grid de Artigos -->
+        <div id="lista-artigos" class="flex-1 grid md:grid-cols-2 gap-10">
+            <p class="text-center col-span-full py-10 text-slate-400">Buscando informativos jurídicos...</p>
         </div>
+
+        <!-- Sidebar de Busca -->
         <aside class="w-full md:w-80">
-            <div class="bg-white p-6 rounded-xl border sticky top-24">
-                <h3 class="font-bold mb-4 border-b pb-2">Pesquisar</h3>
-                <input type="text" id="busca" placeholder="O que você procura?" class="w-full p-2 border rounded outline-none focus:ring-2 focus:ring-stone-400">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm sticky top-24">
+                <h3 class="font-bold text-stone-800 mb-4 border-b pb-2 uppercase text-xs tracking-wider">Pesquisar</h3>
+                <div class="relative">
+                    <input type="text" id="busca" placeholder="O que você procura?" 
+                           class="w-full p-3 border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-stone-200 text-sm">
+                    <i class="fa-solid fa-magnifying-glass absolute right-3 top-3.5 text-slate-300"></i>
+                </div>
             </div>
         </aside>
     </main>
 
+    <footer class="bg-stone-900 text-stone-500 py-10 text-center text-xs">
+        &copy; 2026 Dra. Gabrielly Binsfeld Advocacia e Consultoria.
+    </footer>
+
     <script>
         (async function () {
             const container = document.getElementById('lista-artigos');
+            const inputBusca = document.getElementById('busca');
             let todos = [];
-            const r = await fetch(`https://api.github.com/repos/Gabrielly-Keren-binsfeld/GabriellyBinsfeldAdvogada/contents/content/artigos`);
-            const arquivos = await r.json();
-            for (let f of arquivos) {
-                if (!f.name.endsWith('.md')) continue;
-                const res = await fetch(f.download_url);
-                const texto = await res.text();
-                if (texto.includes('categoria: avalia')) continue;
-                const title = texto.match(/title:\s*"(.*)"/)?.[1] || f.name;
-                const desc = texto.match(/description:\s*"(.*)"/)?.[1] || "Leia mais...";
-                const img = texto.match(/imagem:\s*"(.*)"/)?.[1] || "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800";
-                todos.push({ title, desc, img, path: f.path });
-            }
-            function render(l) {
-                container.innerHTML = l.map(a => `
-                    <article class="bg-white border rounded-xl overflow-hidden shadow-sm flex flex-col">
-                        <img src="${a.img}" class="h-48 w-full object-cover">
-                        <div class="p-6 flex-1 flex flex-col">
-                            <h2 class="font-serif text-xl font-bold mb-3">${a.title}</h2>
-                            <p class="text-stone-600 text-sm mb-6 flex-1">${a.desc}</p>
-                            <a href="artigo.html?f=${encodeURIComponent(a.path)}" class="font-bold text-xs uppercase tracking-widest hover:underline">LEIA MAIS >></a>
-                        </div>
-                    </article>
-                `).join('');
-            }
-            render(todos);
-            document.getElementById('busca').oninput = (e) => {
-                const t = e.target.value.toLowerCase();
-                render(todos.filter(a => a.title.toLowerCase().includes(t)));
-            };
+
+            try {
+                const r = await fetch(`https://api.github.com/repos/Gabrielly-Keren-binsfeld/GabriellyBinsfeldAdvogada/contents/content/artigos`);
+                const arquivos = await r.json();
+
+                for (let f of arquivos) {
+                    if (!f.name.endsWith('.md')) continue;
+                    const res = await fetch(f.download_url);
+                    const texto = await res.text();
+                    
+                    // Pula se for avaliação
+                    if (texto.includes('categoria: avalia')) continue;
+
+                    const title = texto.match(/title:\s*"(.*)"/)?.[1] || f.name.replace('.md', '');
+                    const desc = texto.match(/description:\s*"(.*)"/)?.[1] || "Clique para ler o informativo completo.";
+                    const img = texto.match(/imagem:\s*"(.*)"/)?.[1] || "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800";
+                    const data = texto.match(/date:\s*"(.*)"/)?.[1] || "";
+
+                    todos.push({ title, desc, img, path: f.path, data });
+                }
+
+                function render(lista) {
+                    if (!lista.length) { container.innerHTML = '<p class="col-span-full text-center text-slate-400">Nenhum resultado para essa busca.</p>'; return; }
+                    container.innerHTML = lista.map(a => `
+                        <article class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col">
+                            <img src="${a.img}" class="h-52 w-full object-cover">
+                            <div class="p-8 flex-1 flex flex-col">
+                                <h2 class="font-serif text-2xl font-bold text-stone-800 mb-4 leading-tight">${a.title}</h2>
+                                <p class="text-stone-600 text-sm mb-8 flex-1 leading-relaxed">${a.desc}</p>
+                                <a href="artigo.html?f=${encodeURIComponent(a.path)}" class="font-bold text-xs text-stone-900 uppercase tracking-widest hover:text-stone-500">
+                                    LEIA MAIS >>
+                                </a>
+                                <div class="mt-6 pt-4 border-t border-slate-50 text-[10px] text-slate-400 uppercase tracking-widest">
+                                    ${a.data ? new Date(a.data).toLocaleDateString('pt-BR') : 'Informativo Jurídico'}
+                                </div>
+                            </div>
+                        </article>
+                    `).join('');
+                }
+
+                // Ordena por data (mais recente primeiro)
+                todos.sort((a, b) => b.data.localeCompare(a.data));
+                render(todos);
+
+                // Busca funcional
+                inputBusca.oninput = (e) => {
+                    const t = e.target.value.toLowerCase();
+                    render(todos.filter(a => a.title.toLowerCase().includes(t) || a.desc.toLowerCase().includes(t)));
+                };
+
+            } catch (e) { console.error(e); }
         })();
     </script>
 </body>
 </html>
-````_
