@@ -173,8 +173,12 @@
             // Avaliações cadastradas no painel não entram na lista de artigos
             function ehAvaliacao(meta) {
                 const norm = t => semAcento(t || '').trim();
-                const cat = norm(meta.categoria);
-                if (cat.indexOf('avalia') === 0 || cat.indexOf('depoiment') === 0) return true;
+                const comeca = v => { const c = norm(v).replace(/^[\[\s"'#]+/, ''); return c.indexOf('avalia') === 0 || c.indexOf('depoiment') === 0; };
+                // Qualquer campo (menos título, descrição e texto) que comece com "Avaliação" ou "Depoimento"
+                for (const k in meta) {
+                    if (k === 'title' || k === 'description' || k === 'body') continue;
+                    if (comeca(meta[k])) return true;
+                }
                 // Sem o campo Categoria: vale título como "Avaliação - Rafael L." ou só "Avaliações"
                 return /^(avalia|depoiment)[^\s\-\u2013\u2014:|]*\s*([-\u2013\u2014:|]|$)/.test(norm(meta.title));
             }
@@ -206,7 +210,7 @@
                 const lista = [];
                 for (const pasta of pastas) {
                     try {
-                        const r = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${pasta}`);
+                        const r = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${pasta}?t=${Date.now()}`);
                         if (!r.ok) continue;
                         const data = await r.json();
                         if (Array.isArray(data)) data.filter(f => f.name.toLowerCase().endsWith('.md')).forEach(f => lista.push(f));
@@ -293,7 +297,7 @@
                     const lista = [];
                     for (const file of arquivos) {
                         try {
-                            const res = await fetch(file.download_url, { cache: 'no-store' });
+                            const res = await fetch(file.download_url + '?v=' + Date.now(), { cache: 'no-store' });
                             if (!res.ok) continue;
                             const texto = await res.text();
                             const meta = lerFrontmatter(texto);
