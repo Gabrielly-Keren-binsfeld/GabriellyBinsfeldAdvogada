@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
@@ -173,8 +172,17 @@
 
             // Avaliações cadastradas no painel não entram na lista de artigos
             function ehAvaliacao(meta) {
-                const c = semAcento(meta.categoria || '').trim();
-                return c.indexOf('avalia') === 0 || c.indexOf('depoiment') === 0;
+                const norm = t => semAcento(t || '').trim();
+                const cat = norm(meta.categoria);
+                if (cat.indexOf('avalia') === 0 || cat.indexOf('depoiment') === 0) return true;
+                // Sem o campo Categoria: vale título como "Avaliação - Rafael L." ou só "Avaliações"
+                return /^(avalia|depoiment)[^\s\-\u2013\u2014:|]*\s*([-\u2013\u2014:|]|$)/.test(norm(meta.title));
+            }
+
+            // Tira o prefixo "Avaliação - " do título, deixando só o nome
+            function nomeDaAvaliacao(titulo) {
+                const nome = String(titulo || '').replace(/^(avalia|depoiment)[^\s\-\u2013\u2014:|]*\s*[-\u2013\u2014:|]?\s*/i, '').trim();
+                return nome || 'Cliente';
             }
 
             // Foto de capa: campo "image"/"imagem" ou a primeira imagem do texto
