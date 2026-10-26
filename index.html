@@ -367,8 +367,17 @@
 
             // Itens com categoria "Avaliação", "Avaliações" ou "Depoimento" são avaliações, não artigos
             function ehAvaliacao(meta) {
-                const c = String(meta.categoria || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
-                return c.indexOf('avalia') === 0 || c.indexOf('depoiment') === 0;
+                const norm = t => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+                const cat = norm(meta.categoria);
+                if (cat.indexOf('avalia') === 0 || cat.indexOf('depoiment') === 0) return true;
+                // Sem o campo Categoria: vale título como "Avaliação - Rafael L." ou só "Avaliações"
+                return /^(avalia|depoiment)[^\s\-\u2013\u2014:|]*\s*([-\u2013\u2014:|]|$)/.test(norm(meta.title));
+            }
+
+            // Tira o prefixo "Avaliação - " do título, deixando só o nome
+            function nomeDaAvaliacao(titulo) {
+                const nome = String(titulo || '').replace(/^(avalia|depoiment)[^\s\-\u2013\u2014:|]*\s*[-\u2013\u2014:|]?\s*/i, '').trim();
+                return nome || 'Cliente';
             }
 
             // Texto do corpo do arquivo, sem o cabeçalho e sem marcações do Markdown
@@ -445,7 +454,7 @@
                             const meta = lerFrontmatter(texto);
                             if (ehAvaliacao(meta)) {
                                 avaliacoes.push({
-                                    autor: meta.title || 'Cliente',
+                                    autor: nomeDaAvaliacao(meta.title),
                                     nota: meta.nota || '',
                                     texto: meta.description || lerCorpo(texto),
                                     data: meta.date || ''
