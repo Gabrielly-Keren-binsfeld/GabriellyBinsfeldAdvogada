@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dra. Gabrielly Binsfeld | Advocacia Previdenciária & INSS em São Miguel do Oeste - SC</title>
+    <title>Dra. Gabrielly Binsfeld | Advocacia Previdenciária e INSS em São Miguel do Oeste - SC</title>
     <meta name="description" content="Advocacia Previdenciária especializada em Salário Maternidade, Auxílio-Acidente, Auxílio-Doença e Aposentadorias em São Miguel do Oeste - SC e Atendimento Online.">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
@@ -60,7 +60,7 @@
                 <a href="#inicio" class="hover:text-gold-400 transition">Início</a>
                 <a href="#atuacao" class="hover:text-gold-400 transition">Especialidades</a>
                 <a href="#sobre" class="hover:text-gold-400 transition">Sobre</a>
-                <a href="#artigos" class="hover:text-gold-400 transition">Artigos</a>
+                <a href="artigos.html" class="hover:text-gold-400 transition">Artigos</a>
                 <a href="#contato" class="hover:text-gold-400 transition">Contato</a>
             </nav>
 
@@ -127,7 +127,7 @@
     <section id="atuacao" class="py-20 bg-slate-50">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="font-serif text-3xl font-bold text-navy-900 mb-4">Especialidades Previdenciárias & Jurídicas</h2>
+                <h2 class="font-serif text-3xl font-bold text-navy-900 mb-4">Especialidades Previdenciárias e Jurídicas</h2>
                 <p class="text-slate-600">Defesa completa dos seus direitos contra indeferimentos e atrasos do INSS.</p>
             </div>
 
@@ -242,12 +242,19 @@
     <section id="artigos" class="py-20 bg-slate-50 border-t border-slate-200">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="font-serif text-3xl font-bold text-navy-900 mb-4">Artigos & Informativos Jurídicos</h2>
+                <h2 class="font-serif text-3xl font-bold text-navy-900 mb-4">Artigos e Informativos Jurídicos</h2>
                 <p class="text-slate-600">Informativos atualizados sobre benefícios do INSS e direitos previdenciários.</p>
             </div>
 
             <div id="lista-artigos" class="grid md:grid-cols-3 gap-8">
                 <p class="text-center md:col-span-3 text-slate-500">Carregando artigos...</p>
+            </div>
+
+            <div id="ver-todos" class="hidden text-center mt-12">
+                <a href="artigos.html"
+                   class="bg-navy-900 hover:bg-navy-800 text-white font-semibold px-6 py-3 rounded-xl transition inline-flex items-center justify-center gap-2">
+                    Ver todos os artigos <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -284,7 +291,7 @@
         <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 mb-8">
             <div>
                 <p class="font-serif text-lg font-bold text-white mb-2">Dra. Gabrielly Binsfeld</p>
-                <p class="text-xs mb-1">Advocacia & Consultoria Jurídica</p>
+                <p class="text-xs mb-1">Advocacia e Consultoria Jurídica</p>
                 <p class="text-xs text-slate-500 mb-4">OAB/SC 66.948</p>
                 <div class="flex gap-4 text-lg text-slate-300">
                     <a href="https://instagram.com/gabriellybinsfeld.prev?psln=MWMzYzh5cndmdmlmMA%3D%3D" target="_blank" rel="noopener" class="hover:text-gold-400 transition" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -292,7 +299,7 @@
                 </div>
             </div>
             <div>
-                <p class="font-semibold text-white mb-3">Contato & Endereço</p>
+                <p class="font-semibold text-white mb-3">Contato e Endereço</p>
                 <p class="mb-1"><i class="fa-solid fa-location-dot mr-2 text-gold-400"></i> Atendimento Presencial e Online</p>
                 <p class="mb-1"><i class="fa-solid fa-phone mr-2 text-gold-400"></i> (49) 98433-1669</p>
                 <p><i class="fa-solid fa-envelope mr-2 text-gold-400"></i> gabriellybinsfeld.adv@gmail.com</p>
@@ -464,7 +471,7 @@
                     // Mais recentes primeiro (quando houver data)
                     artigos.sort((a, b) => (b.data || '').localeCompare(a.data || ''));
 
-                    container.innerHTML = artigos.map(a => `
+                    container.innerHTML = artigos.slice(0, 3).map(a => `
                         <article class="bg-sand-100 rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
                             <div class="p-6">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-wine-700 bg-wine-50 px-3 py-1 rounded-full border border-wine-200">${esc(a.categoria)}</span>
@@ -484,6 +491,8 @@
                             </div>
                         </article>
                     `).join('');
+                    const verTodos = document.getElementById('ver-todos');
+                    if (verTodos) verTodos.classList.remove('hidden');
                 } catch (erro) {
                     console.error('Erro ao carregar artigos:', erro);
                     container.innerHTML = vazio;
