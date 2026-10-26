@@ -7,9 +7,19 @@
     <meta name="description" content="Advocacia Previdenciária especializada em Salário Maternidade, Auxílio-Acidente, Auxílio-Doença e Aposentadorias em São Miguel do Oeste - SC e Atendimento Online.">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
+
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Netlify Identity Widget Script -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <script>
@@ -21,9 +31,16 @@
                         gold: { 400: '#d19f47', 500: '#d19f47', 600: '#a97b2c' },
                         wine: { 50: '#f6ebee', 200: '#e6c9d1', 500: '#9b4b5f', 600: '#853a4d', 700: '#6f2a3b' },
                         sand: { 100: '#f4f2f0' },
-                        slate: { 50: '#f9f7f6', 100: '#ebe6e0', 200: '#e0d9d1', 300: '#d3cbc2', 400: '#b5aca3', 500: '#8f8178', 600: '#7e6f67', 700: '#5f524a', 800: '#30231d', 900: '#30231d', 950: '#423024' }
+                        slate: {
+                            50: '#f9f7f6', 100: '#ebe6e0', 200: '#e0d9d1', 300: '#d3cbc2',
+                            400: '#b5aca3', 500: '#8f8178', 600: '#7e6f67', 700: '#5f524a',
+                            800: '#30231d', 900: '#30231d', 950: '#423024'
+                        }
                     },
-                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
                 }
             }
         }
@@ -31,24 +48,29 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-    <!-- Cabeçalho -->
+    <!-- Cabeçalho / Navegação -->
     <header class="fixed w-full top-0 z-40 bg-navy-950/95 backdrop-blur border-b border-slate-800 text-white">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <a href="#inicio" class="font-serif text-xl font-bold tracking-wide text-gold-400 flex items-center gap-2">
                 <i class="fa-solid fa-scale-balanced"></i>
                 <span>Dra. Gabrielly Binsfeld</span>
             </a>
+
             <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-300">
                 <a href="#inicio" class="hover:text-gold-400 transition">Início</a>
                 <a href="#atuacao" class="hover:text-gold-400 transition">Especialidades</a>
                 <a href="#sobre" class="hover:text-gold-400 transition">Sobre</a>
-                <!-- LINK ALTERADO PARA A PÁGINA DE ARTIGOS -->
+                <!-- Alterado para abrir a página de artigos -->
                 <a href="artigos.html" class="hover:text-gold-400 transition">Artigos</a>
                 <a href="#contato" class="hover:text-gold-400 transition">Contato</a>
             </nav>
-            <a href="https://wa.me/5549984331669" target="_blank" class="bg-gold-500 hover:bg-gold-600 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm transition flex items-center gap-2">
+
+            <a href="https://wa.me/5549984331669?text=Olá,%20Dra.%20Gabrielly.%20Gostaria%20de%20agendar%20uma%20consulta."
+               target="_blank" rel="noopener"
+               class="bg-gold-500 hover:bg-gold-600 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm transition flex items-center gap-2">
                 <i class="fa-brands fa-whatsapp text-lg"></i>
-                <span>WhatsApp</span>
+                <span class="hidden sm:inline">Atendimento WhatsApp</span>
+                <span class="sm:hidden">WhatsApp</span>
             </a>
         </div>
     </header>
@@ -66,16 +88,35 @@
                 <p class="text-slate-300 text-lg mb-8 leading-relaxed">
                     Especialista em Salário Maternidade, Auxílio-Acidente, Auxílio-Doença e Aposentadorias. Atendimento presencial e online.
                 </p>
-                <a href="https://wa.me/5549984331669" class="bg-wine-500 hover:bg-wine-600 text-white font-semibold px-6 py-4 rounded-xl text-center shadow-lg transition flex items-center justify-center gap-3">
-                    <i class="fa-brands fa-whatsapp text-2xl"></i>
-                    <span>Analisar Meu Caso no WhatsApp</span>
-                </a>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://wa.me/5549984331669?text=Olá,%20Dra.%20Gabrielly.%20Preciso%20de%20orientação%20sobre%20meu%20benefício."
+                       target="_blank" rel="noopener"
+                       class="bg-wine-500 hover:bg-wine-600 text-white font-semibold px-6 py-4 rounded-xl text-center shadow-lg hover:shadow-black/30 transition flex items-center justify-center gap-3">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        <span>Analisar Meu Caso no WhatsApp</span>
+                    </a>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-slate-800 grid grid-cols-2 gap-4 text-xs text-slate-400">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-user-shield text-gold-400 text-sm"></i>
+                        <span>Atendimento Sigiloso</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-clock text-gold-400 text-sm"></i>
+                        <span>Análise Rápida do Benefício</span>
+                    </div>
+                </div>
             </div>
+
             <div class="relative">
                 <div class="w-full h-[450px] bg-slate-800 rounded-2xl overflow-hidden border-2 border-slate-700 shadow-2xl relative">
-                    <img src="advogada-foto-CoDFSTYG.jpeg" alt="Dra. Gabrielly Binsfeld" class="w-full h-full object-cover">
-                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-navy-950 via-navy-950/60 to-transparent p-6 text-white">
-                        <p class="font-serif text-xl font-bold">Dra. Gabrielly Binsfeld</p>
+                    <img src="advogada-foto-CoDFSTYG.jpeg"
+                         alt="Dra. Gabrielly Binsfeld - Advogada"
+                         class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-navy-950 via-navy-950/60 to-transparent p-6">
+                        <p class="font-serif text-xl font-bold text-white">Dra. Gabrielly Binsfeld</p>
                         <p class="text-gold-400 text-sm">OAB/SC 66.948</p>
                     </div>
                 </div>
@@ -90,99 +131,272 @@
                 <h2 class="font-serif text-3xl font-bold text-navy-900 mb-4">Especialidades Previdenciárias e Jurídicas</h2>
                 <p class="text-slate-600">Defesa completa dos seus direitos contra indeferimentos e atrasos do INSS.</p>
             </div>
+
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Card Maternidade -->
-                <div class="bg-sand-100 p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="bg-sand-100 p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
                     <div class="w-12 h-12 bg-[#e6ddde] text-wine-700 rounded-xl flex items-center justify-center text-xl mb-4">
                         <i class="fa-solid fa-baby"></i>
                     </div>
                     <h3 class="font-serif text-xl font-bold text-navy-900 mb-2">Salário Maternidade</h3>
-                    <p class="text-slate-600 text-sm mb-4">Orientação e requerimento do auxílio para mães trabalhadoras, autônomas, rurais e desempregadas.</p>
-                    <a href="https://wa.me/5549984331669" class="text-navy-900 font-semibold text-sm inline-flex items-center gap-1">Consultar Direito <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        Orientação e requerimento do auxílio para mães trabalhadoras, autônomas, rurais e desempregadas.
+                    </p>
+                    <a href="https://wa.me/5549984331669?text=Quero%20saber%20se%20tenho%20direito%20ao%20Salário%20Maternidade"
+                       target="_blank" rel="noopener" class="text-navy-900 font-semibold text-sm hover:text-gold-600 inline-flex items-center gap-1">
+                        Consultar Direito <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
                 </div>
-                <!-- Outros cards omitidos para brevidade, mas devem ser mantidos -->
+
+                <div class="bg-sand-100 p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-[#e6ddde] text-wine-700 rounded-xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-user-injured"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-navy-900 mb-2">Auxílio-Acidente</h3>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        Indenização mensal para trabalhadores que ficaram com sequelas permanentes após acidente de qualquer natureza.
+                    </p>
+                    <a href="https://wa.me/5549984331669?text=Tenho%20dúvidas%20sobre%20Auxílio-Acidente"
+                       target="_blank" rel="noopener" class="text-navy-900 font-semibold text-sm hover:text-gold-600 inline-flex items-center gap-1">
+                        Consultar Direito <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <div class="bg-sand-100 p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-[#e6ddde] text-wine-700 rounded-xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-notes-medical"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-navy-900 mb-2">Auxílio-Doença / BPC</h3>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        Suporte completo para perícias, benefícios negados por incapacidade temporária ou permanente e BPC/LOAS.
+                    </p>
+                    <a href="https://wa.me/5549984331669?text=Meu%20Auxílio-Doença%20foi%20negado%20ou%20preciso%20dar%20entrada"
+                       target="_blank" rel="noopener" class="text-navy-900 font-semibold text-sm hover:text-gold-600 inline-flex items-center gap-1">
+                        Consultar Benefício <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <div class="bg-sand-100 p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-[#e6ddde] text-wine-700 rounded-xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-person-cane"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-navy-900 mb-2">Aposentadorias</h3>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        Planejamento e concessão de Aposentadoria por Idade, Tempo de Contribuição, Especial e Trabalhador Rural.
+                    </p>
+                    <a href="https://wa.me/5549984331669?text=Gostaria%20de%20planejar%20minha%20Aposentadoria"
+                       target="_blank" rel="noopener" class="text-navy-900 font-semibold text-sm hover:text-gold-600 inline-flex items-center gap-1">
+                        Consultar Regras <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Avaliações -->
+    <!-- Sobre -->
+    <section id="sobre" class="py-20 bg-slate-100">
+        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <p class="text-slate-600 mb-4 leading-relaxed">
+                    A <strong>Dra. Gabrielly Binsfeld</strong> (OAB/SC 66.948) atua com dedicação exclusiva na defesa dos direitos previdenciários e assistenciais dos segurados do INSS.
+                </p>
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    Oferece <strong>atendimento presencial e online</strong>, com suporte acessível e transparente para esclarecer todas as suas dúvidas.
+                </p>
+
+                <div class="flex flex-wrap items-center gap-3 mb-8">
+                    <a href="https://instagram.com/gabriellybinsfeld.prev?psln=MWMzYzh5cndmdmlmMA%3D%3D" target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-white rounded-lg text-slate-800 text-sm font-semibold transition">
+                        <i class="fa-brands fa-instagram text-wine-500 text-lg"></i> Instagram
+                    </a>
+                    <a href="https://tiktok.com/@gabriellybinsfeld.adv" target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-white rounded-lg text-slate-800 text-sm font-semibold transition">
+                        <i class="fa-brands fa-tiktok text-black text-lg"></i> @gabriellybinsfeld.adv
+                    </a>
+                </div>
+
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center gap-3 text-slate-700 font-medium">
+                        <i class="fa-solid fa-circle-check text-wine-700"></i>
+                        Atendimento humanizado e focado em soluções ágeis
+                    </li>
+                    <li class="flex items-center gap-3 text-slate-700 font-medium">
+                        <i class="fa-solid fa-circle-check text-wine-700"></i>
+                        Análise criteriosa de documentação médica e contribuições
+                    </li>
+                    <li class="flex items-center gap-3 text-slate-700 font-medium">
+                        <i class="fa-solid fa-circle-check text-wine-700"></i>
+                        Respeito rigoroso ao Código de Ética e Disciplina da OAB
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-slate-50 p-8 rounded-2xl border border-slate-200 text-center">
+                <i class="fa-solid fa-quote-left text-4xl text-gold-500 mb-4 block"></i>
+                <blockquote class="font-serif text-lg italic text-slate-800 mb-6">
+                    "Defender o direito ao seu benefício é garantir segurança e dignidade para a sua vida e de sua família."
+                </blockquote>
+                <p class="font-bold text-navy-900">Dra. Gabrielly Binsfeld</p>
+                <p class="text-sm text-slate-500">Advogada - OAB/SC 66.948</p>
+                <p class="text-xs text-slate-400 mt-1">Atendimento presencial e online</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artigos -->
+    <section id="artigos" class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="font-serif text-3xl font-bold text-navy-900 mb-4">Artigos e Informativos Jurídicos</h2>
+                <p class="text-slate-600">Informativos atualizados sobre benefícios do INSS e direitos previdenciários.</p>
+            </div>
+
+            <div id="lista-artigos" class="grid md:grid-cols-3 gap-8">
+                <p class="text-center md:col-span-3 text-slate-500">Carregando artigos...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avaliações no Google -->
     <section id="avaliacoes" class="py-16 bg-slate-100 border-t border-slate-200">
         <div class="max-w-6xl mx-auto px-4 text-center">
-            <!-- IMAGEM SOLICITADA -->
+            <!-- Imagem solicitada -->
             <img src="As-avaliacoes-do-Google-1024x538.jpg" alt="Avaliações no Google" class="max-w-[280px] mx-auto mb-6">
             
             <h2 class="font-serif text-3xl font-bold text-navy-900 mb-3">
                 Avaliações no Google <span id="count-avaliacoes" class="text-gold-600"></span>
             </h2>
-            <div id="lista-avaliacoes" class="grid md:grid-cols-3 gap-6 mb-10 text-left mt-10"></div>
-            <a href="https://maps.app.goo.gl/Vpys6v2R3usUzJFv8" target="_blank" class="bg-navy-900 hover:bg-navy-800 text-white font-semibold px-6 py-3 rounded-xl transition inline-flex items-center gap-2">
-                <i class="fa-brands fa-google"></i> Ver avaliações no Google
-            </a>
+            <p class="text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto">
+                As avaliações são feitas pelas próprias pessoas atendidas, diretamente no perfil da Dra. Gabrielly no Google.
+            </p>
+
+            <div id="lista-avaliacoes" class="grid md:grid-cols-3 gap-6 mb-10 text-left"></div>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://maps.app.goo.gl/Vpys6v2R3usUzJFv8" target="_blank" rel="noopener"
+                   class="bg-navy-900 hover:bg-navy-800 text-white font-semibold px-6 py-3 rounded-xl transition inline-flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-google"></i> Ver avaliações no Google
+                </a>
+                <a href="https://maps.app.goo.gl/Vpys6v2R3usUzJFv8" target="_blank" rel="noopener"
+                   class="bg-slate-50 hover:bg-white text-navy-900 border border-slate-200 font-semibold px-6 py-3 rounded-xl transition inline-flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-star text-gold-600"></i> Deixar uma avaliação
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- Rodapé -->
-    <footer id="contato" class="bg-slate-950 text-slate-400 py-12 text-sm">
-        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 text-center md:text-left">
+    <footer id="contato" class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900 text-sm">
+        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 mb-8">
             <div>
-                <p class="font-serif text-lg font-bold text-white">Dra. Gabrielly Binsfeld</p>
-                <p class="text-xs">Advocacia e Consultoria Jurídica</p>
+                <p class="font-serif text-lg font-bold text-white mb-2">Dra. Gabrielly Binsfeld</p>
+                <p class="text-xs mb-1">Advocacia e Consultoria Jurídica</p>
+                <p class="text-xs text-slate-500 mb-4">OAB/SC 66.948</p>
+                <div class="flex gap-4 text-lg text-slate-300">
+                    <a href="https://instagram.com/gabriellybinsfeld.prev?psln=MWMzYzh5cndmdmlmMA%3D%3D" target="_blank" rel="noopener" class="hover:text-gold-400 transition" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://tiktok.com/@gabriellybinsfeld.adv" target="_blank" rel="noopener" class="hover:text-gold-400 transition" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
             </div>
             <div>
                 <p class="font-semibold text-white mb-3">Contato e Endereço</p>
-                <p><i class="fa-solid fa-phone mr-2 text-gold-400"></i> (49) 98433-1669</p>
+                <p class="mb-1"><i class="fa-solid fa-location-dot mr-2 text-gold-400"></i> Atendimento Presencial e Online</p>
+                <p class="mb-1"><i class="fa-solid fa-phone mr-2 text-gold-400"></i> (49) 98433-1669</p>
+                <p><i class="fa-solid fa-envelope mr-2 text-gold-400"></i> gabriellybinsfeld.adv@gmail.com</p>
             </div>
-            <div class="flex justify-center md:justify-end gap-4 text-xl">
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            <div>
+                <p class="font-semibold text-white mb-3">Horário de Atendimento</p>
+                <p class="mb-1">Segunda a Sexta: 08:00 às 18:00</p>
+                <p class="text-xs text-slate-500 mt-4">
+                    Página mantida em observância ao Código de Ética e Disciplina da OAB.
+                </p>
             </div>
+        </div>
+        <div class="max-w-6xl mx-auto px-4 border-t border-slate-900 pt-6 text-center text-xs text-slate-600">
+            &copy; 2026 Dra. Gabrielly Binsfeld Advocacia. Todos os direitos reservados.
         </div>
     </footer>
 
-    <!-- Botão WhatsApp -->
-    <a href="https://wa.me/5549984331669" target="_blank" class="fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl z-50"><i class="fa-brands fa-whatsapp"></i></a>
+    <!-- Botão Flutuante do WhatsApp -->
+    <a href="https://wa.me/5549984331669?text=Olá,%20Dra.%20Gabrielly.%20Gostaria%20de%20agendar%20uma%20consulta."
+       target="_blank" rel="noopener"
+       aria-label="Atendimento no WhatsApp"
+       class="fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl hover:bg-emerald-400 hover:scale-110 transition z-50">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
-    <!-- Script para Carregar Avaliações -->
+    <!-- Scripts de Carregamento -->
     <script>
         (function () {
+            const container = document.getElementById('lista-artigos');
             let repoOwner = "Gabrielly-Keren-binsfeld";
             let repoName = "GabriellyBinsfeldAdvogada";
 
-            async function carregarAvaliacoes() {
+            function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+            function lerFrontmatter(texto) {
+                const meta = {};
+                const m = texto.match(/^---\n([\s\S]*?)\n---/);
+                if (!m) return meta;
+                m[1].split('\n').forEach(linha => {
+                    const i = linha.indexOf(':');
+                    if (i > 0) { meta[linha.slice(0, i).trim().toLowerCase()] = linha.slice(i + 1).trim().replace(/^["'](.*)["']$/, '$1'); }
+                });
+                return meta;
+            }
+            function ehAvaliacao(meta) {
+                const cat = String(meta.categoria || '').toLowerCase();
+                return cat.includes('avalia') || cat.includes('depoiment');
+            }
+
+            function mostrarAvaliacoes(lista) {
                 const box = document.getElementById('lista-avaliacoes');
                 const counter = document.getElementById('count-avaliacoes');
+                if (counter) counter.innerText = `(${lista.length})`;
+                if (!lista.length) return;
+                box.innerHTML = lista.map(a => `
+                    <div class="bg-sand-100 rounded-2xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm">
+                        <div>
+                            <div class="text-gold-500 mb-3">★★★★★</div>
+                            <p class="text-slate-600 text-sm italic">"${esc(a.texto)}"</p>
+                        </div>
+                        <p class="mt-4 font-bold text-navy-900 text-xs">- ${esc(a.autor)}</p>
+                    </div>
+                `).join('');
+            }
+
+            async function carregar() {
                 try {
                     const r = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/content/artigos`);
                     const arquivos = await r.json();
-                    let avaliacoes = [];
+                    const artigos = [];
+                    const avaliacoes = [];
 
                     for (let file of arquivos) {
                         if (!file.name.endsWith('.md')) continue;
                         const res = await fetch(file.download_url);
                         const texto = await res.text();
-                        // Lógica simplificada de detecção de depoimento
-                        if (texto.toLowerCase().includes('categoria: avalia') || texto.toLowerCase().includes('categoria: depoimento')) {
-                            const matchTitle = texto.match(/title:\s*"(.*)"/);
-                            const matchNota = texto.match(/nota:\s*(.*)/);
-                            avaliacoes.push({
-                                autor: matchTitle ? matchTitle[1] : 'Cliente',
-                                nota: matchNota ? matchNota[1] : 5,
-                                texto: texto.split('---').pop().trim()
+                        const meta = lerFrontmatter(texto);
+                        
+                        if (ehAvaliacao(meta)) {
+                            avaliacoes.push({ autor: meta.title || 'Cliente', texto: texto.split('---').pop().trim() });
+                        } else {
+                            artigos.push({
+                                path: file.path,
+                                titulo: meta.title || file.name,
+                                categoria: meta.categoria || 'INSS',
+                                descricao: meta.description || 'Clique para ler mais.'
                             });
                         }
                     }
 
-                    if (counter) counter.innerText = `(${avaliacoes.length})`;
-                    box.innerHTML = avaliacoes.map(a => `
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                            <div class="text-gold-500 mb-2">★★★★★</div>
-                            <p class="text-slate-600 text-sm italic">"${a.texto.substring(0, 150)}..."</p>
-                            <p class="mt-4 font-bold text-navy-900 text-xs">- ${a.autor}</p>
-                        </div>
+                    mostrarAvaliacoes(avaliacoes);
+                    container.innerHTML = artigos.slice(0, 3).map(a => `
+                        <article class="bg-sand-100 rounded-2xl border border-slate-200 p-6 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-semibold text-wine-700 bg-wine-50 px-3 py-1 rounded-full">${esc(a.categoria)}</span>
+                                <h3 class="font-serif text-xl font-bold text-navy-900 mt-4 mb-2">${esc(a.titulo)}</h3>
+                            </div>
+                            <a href="artigos.html" class="bg-navy-900 text-white text-sm px-4 py-2 rounded-lg text-center mt-4">Ver Artigo</a>
+                        </article>
                     `).join('');
                 } catch (e) { console.error(e); }
             }
-            carregarAvaliacoes();
+            carregar();
         })();
     </script>
 </body>
