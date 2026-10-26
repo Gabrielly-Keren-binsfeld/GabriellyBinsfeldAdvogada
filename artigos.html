@@ -1,1 +1,320 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artigos | Dra. Gabrielly Binsfeld</title>
+    <meta name="description" content="Artigos e informativos sobre benefícios do INSS e direitos previdenciários, pela Dra. Gabrielly Binsfeld.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 800: '#5a4b41', 900: '#423024', 950: '#4c3b2f' },
+                        gold: { 400: '#d19f47', 500: '#d19f47', 600: '#a97b2c' },
+                        wine: { 50: '#f6ebee', 200: '#e6c9d1', 500: '#9b4b5f', 600: '#853a4d', 700: '#6f2a3b' },
+                        sand: { 100: '#f4f2f0' },
+                        slate: {
+                            50: '#f9f7f6', 100: '#ebe6e0', 200: '#e0d9d1', 300: '#d3cbc2',
+                            400: '#b5aca3', 500: '#8f8178', 600: '#7e6f67', 700: '#5f524a',
+                            800: '#30231d', 900: '#30231d', 950: '#423024'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- Cabeçalho / Navegação -->
+    <header class="fixed w-full top-0 z-40 bg-navy-950/95 backdrop-blur border-b border-slate-800 text-white">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-serif text-xl font-bold tracking-wide text-gold-400 flex items-center gap-2">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>Dra. Gabrielly Binsfeld</span>
+            </a>
+
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-300">
+                <a href="index.html#inicio" class="hover:text-gold-400 transition">Início</a>
+                <a href="index.html#atuacao" class="hover:text-gold-400 transition">Especialidades</a>
+                <a href="index.html#sobre" class="hover:text-gold-400 transition">Sobre</a>
+                <a href="artigos.html" class="text-gold-400 border-b-2 border-gold-400 pb-1">Artigos</a>
+                <a href="index.html#contato" class="hover:text-gold-400 transition">Contato</a>
+            </nav>
+
+            <a href="https://wa.me/5549984331669?text=Olá,%20Dra.%20Gabrielly.%20Gostaria%20de%20agendar%20uma%20consulta."
+               target="_blank" rel="noopener"
+               class="bg-gold-500 hover:bg-gold-600 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm transition flex items-center gap-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span class="hidden sm:inline">Atendimento WhatsApp</span>
+                <span class="sm:hidden">WhatsApp</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Faixa de título -->
+    <section class="pt-32 pb-14 bg-navy-900 text-white text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <h1 class="font-serif text-4xl sm:text-5xl font-bold">Artigos</h1>
+            <div class="w-16 h-1 bg-gold-500 mx-auto mt-4 rounded"></div>
+            <p class="text-slate-300 mt-5">Informativos atualizados sobre benefícios do INSS e direitos previdenciários.</p>
+        </div>
+    </section>
+
+    <!-- Lista de artigos + pesquisa -->
+    <main class="py-14">
+        <div class="max-w-6xl mx-auto px-4 grid lg:grid-cols-3 gap-10">
+
+            <div class="lg:col-span-2">
+                <div id="grade" class="grid sm:grid-cols-2 gap-6">
+                    <p class="text-slate-500 sm:col-span-2">Carregando artigos...</p>
+                </div>
+                <nav id="paginacao" class="flex flex-wrap items-center justify-center gap-2 mt-10" aria-label="Paginação"></nav>
+            </div>
+
+            <aside class="order-first lg:order-last">
+                <div class="flex shadow-sm">
+                    <input id="busca" type="search" placeholder="Pesquisar..." autocomplete="off"
+                           class="w-full bg-white border border-slate-200 px-4 py-3 text-sm text-slate-800 outline-none focus:border-gold-500 rounded-l-lg">
+                    <button id="busca-btn" type="button" aria-label="Pesquisar"
+                            class="bg-navy-900 hover:bg-navy-800 text-white px-5 rounded-r-lg transition">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <p id="contagem" class="text-xs text-slate-500 mt-3"></p>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-950 text-slate-400 py-8 text-center text-xs">
+        <p class="mb-1">Dra. Gabrielly Binsfeld &middot; OAB/SC 66.948</p>
+        <p class="text-slate-600">&copy; 2026 Dra. Gabrielly Binsfeld Advocacia. Página mantida em observância ao Código de Ética e Disciplina da OAB.</p>
+    </footer>
+
+    <!-- Botão Flutuante do WhatsApp -->
+    <a href="https://wa.me/5549984331669?text=Olá,%20Dra.%20Gabrielly.%20Gostaria%20de%20agendar%20uma%20consulta."
+       target="_blank" rel="noopener"
+       aria-label="Atendimento no WhatsApp"
+       class="fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl hover:bg-emerald-400 hover:scale-110 transition z-50">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script>
+        (function () {
+            const POR_PAGINA = 8;
+            const grade = document.getElementById('grade');
+            const paginacao = document.getElementById('paginacao');
+            const busca = document.getElementById('busca');
+            const buscaBtn = document.getElementById('busca-btn');
+            const contagem = document.getElementById('contagem');
+
+            // Dono e repositório (detectados pelo endereço do GitHub Pages)
+            let repoOwner = "Gabrielly-Keren-binsfeld";
+            let repoName = "GabriellyBinsfeldAdvogada";
+            if (location.hostname.endsWith('.github.io')) {
+                repoOwner = location.hostname.split('.')[0];
+                const seg = location.pathname.split('/').filter(Boolean)[0];
+                if (seg && !seg.endsWith('.html')) repoName = seg;
+            }
+            const pastas = ["content/artigos", "_artigos", "artigos"];
+
+            let todos = [];
+            let filtrados = [];
+            let pagina = 1;
+
+            function esc(s) {
+                return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+            }
+            function semAcento(s) {
+                return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            }
+
+            function lerFrontmatter(texto) {
+                const meta = {};
+                const m = texto.replace(/\r/g, '').match(/^---\n([\s\S]*?)\n---/);
+                if (!m) return meta;
+                m[1].split('\n').forEach(linha => {
+                    const i = linha.indexOf(':');
+                    if (i > 0) {
+                        const k = linha.slice(0, i).trim();
+                        const v = linha.slice(i + 1).trim().replace(/^["'](.*)["']$/, '$1');
+                        if (k) meta[k] = v;
+                    }
+                });
+                return meta;
+            }
+
+            function corpoBruto(texto) {
+                return texto.replace(/\r/g, '').replace(/^---\n[\s\S]*?\n---\n?/, '');
+            }
+
+            function lerCorpo(texto) {
+                return corpoBruto(texto)
+                    .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
+                    .replace(/[#*_`>]/g, '')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+            }
+
+            // Avaliações cadastradas no painel não entram na lista de artigos
+            function ehAvaliacao(meta) {
+                const c = semAcento(meta.categoria || '').trim();
+                return c.indexOf('avalia') === 0 || c.indexOf('depoiment') === 0;
+            }
+
+            // Foto de capa: campo "image"/"imagem" ou a primeira imagem do texto
+            function capa(meta, texto) {
+                let src = meta.image || meta.imagem || '';
+                if (!src) {
+                    const m = corpoBruto(texto).match(/!\[[^\]]*\]\(([^)\s]+)/);
+                    if (m) src = m[1];
+                }
+                if (!src) return '';
+                if (/^https?:\/\//i.test(src)) return src;
+                return src.replace(/^\/+/, '');
+            }
+
+            function formatarData(d) {
+                const dt = new Date(d);
+                return (!d || isNaN(dt)) ? '' : dt.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+            }
+
+            async function listarArquivos() {
+                const lista = [];
+                for (const pasta of pastas) {
+                    try {
+                        const r = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${pasta}`);
+                        if (!r.ok) continue;
+                        const data = await r.json();
+                        if (Array.isArray(data)) data.filter(f => f.name.toLowerCase().endsWith('.md')).forEach(f => lista.push(f));
+                    } catch (e) { /* tenta a próxima pasta */ }
+                }
+                return lista;
+            }
+
+            function cartao(a) {
+                const imagem = a.capa
+                    ? `<img src="${esc(a.capa)}" alt="" loading="lazy" class="w-full h-44 object-cover" onerror="this.outerHTML='<div class=&quot;h-44 bg-gradient-to-br from-navy-900 to-navy-950 flex items-center justify-center text-gold-400 text-4xl&quot;><i class=&quot;fa-solid fa-scale-balanced&quot;></i></div>'">`
+                    : `<div class="h-44 bg-gradient-to-br from-navy-900 to-navy-950 flex items-center justify-center text-gold-400 text-4xl"><i class="fa-solid fa-scale-balanced"></i></div>`;
+                return `
+                    <article class="bg-sand-100 border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col overflow-hidden rounded-xl">
+                        ${imagem}
+                        <div class="p-5 flex-1 flex flex-col">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-wine-700">${esc(a.categoria)}</span>
+                            <h2 class="font-serif text-xl font-bold text-navy-900 mt-2 mb-3 leading-snug">${esc(a.titulo)}</h2>
+                            <p class="text-slate-600 text-sm leading-relaxed line-clamp-3 mb-4">${esc(a.descricao)}</p>
+                            <a href="artigo.html?f=${encodeURIComponent(a.path)}"
+                               class="mt-auto text-navy-900 hover:text-gold-600 font-bold text-xs uppercase tracking-wide inline-flex items-center gap-2">
+                                Leia mais <i class="fa-solid fa-angles-right text-[10px]"></i>
+                            </a>
+                        </div>
+                        ${a.data ? `<div class="border-t border-slate-200 px-5 py-3 text-xs text-slate-500">${esc(formatarData(a.data))}</div>` : ''}
+                    </article>`;
+            }
+
+            function botaoPagina(rotulo, alvo, ativo, desativado) {
+                const base = 'min-w-[2.5rem] h-10 px-3 rounded-lg text-sm font-semibold border transition';
+                const cor = ativo ? ' bg-navy-900 text-white border-navy-900'
+                    : desativado ? ' bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed'
+                    : ' bg-white text-navy-900 border-slate-200 hover:border-gold-500';
+                return `<button type="button" data-pg="${alvo}" ${desativado ? 'disabled' : ''} class="${base}${cor}">${rotulo}</button>`;
+            }
+
+            function desenhar() {
+                const total = filtrados.length;
+                const paginas = Math.max(1, Math.ceil(total / POR_PAGINA));
+                if (pagina > paginas) pagina = paginas;
+
+                if (!todos.length) {
+                    grade.innerHTML = '<p class="text-slate-500 sm:col-span-2">Nenhum artigo publicado no momento.</p>';
+                    paginacao.innerHTML = ''; contagem.textContent = '';
+                    return;
+                }
+                if (!total) {
+                    grade.innerHTML = '<p class="text-slate-500 sm:col-span-2">Nenhum artigo encontrado para esta pesquisa.</p>';
+                    paginacao.innerHTML = ''; contagem.textContent = '';
+                    return;
+                }
+
+                const ini = (pagina - 1) * POR_PAGINA;
+                grade.innerHTML = filtrados.slice(ini, ini + POR_PAGINA).map(cartao).join('');
+                contagem.textContent = total + (total === 1 ? ' artigo' : ' artigos');
+
+                if (paginas === 1) { paginacao.innerHTML = ''; return; }
+                let h = botaoPagina('&laquo; Anterior', pagina - 1, false, pagina === 1);
+                for (let p = 1; p <= paginas; p++) h += botaoPagina(p, p, p === pagina, false);
+                h += botaoPagina('Seguinte &raquo;', pagina + 1, false, pagina === paginas);
+                paginacao.innerHTML = h;
+            }
+
+            function filtrar() {
+                const t = semAcento(busca.value).trim();
+                filtrados = !t ? todos.slice() : todos.filter(a => semAcento(a.titulo + ' ' + a.descricao + ' ' + a.categoria).includes(t));
+                pagina = 1;
+                desenhar();
+            }
+
+            paginacao.addEventListener('click', e => {
+                const b = e.target.closest('button[data-pg]');
+                if (!b || b.disabled) return;
+                pagina = Number(b.getAttribute('data-pg'));
+                desenhar();
+                grade.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+            busca.addEventListener('input', filtrar);
+            buscaBtn.addEventListener('click', filtrar);
+
+            async function carregar() {
+                try {
+                    const arquivos = await listarArquivos();
+                    const lista = [];
+                    for (const file of arquivos) {
+                        try {
+                            const res = await fetch(file.download_url, { cache: 'no-store' });
+                            if (!res.ok) continue;
+                            const texto = await res.text();
+                            const meta = lerFrontmatter(texto);
+                            if (ehAvaliacao(meta)) continue;
+                            lista.push({
+                                path: file.path,
+                                titulo: meta.title || file.name.replace(/\.md$/i, ''),
+                                categoria: meta.categoria || 'INSS',
+                                descricao: meta.description || lerCorpo(texto).slice(0, 180),
+                                data: meta.date || '',
+                                capa: capa(meta, texto)
+                            });
+                        } catch (e) {
+                            console.error('Erro ao carregar artigo:', file.name, e);
+                        }
+                    }
+                    // Mais recentes primeiro (os sem data ficam depois)
+                    lista.sort((a, b) => (b.data || '').localeCompare(a.data || ''));
+                    todos = lista;
+                    filtrados = lista.slice();
+                    desenhar();
+                } catch (erro) {
+                    console.error('Erro ao carregar artigos:', erro);
+                    grade.innerHTML = '<p class="text-slate-500 sm:col-span-2">Nenhum artigo publicado no momento.</p>';
+                }
+            }
+
+            carregar();
+        })();
+    </script>
+</body>
+</html>
