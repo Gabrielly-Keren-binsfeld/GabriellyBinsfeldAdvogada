@@ -1,7 +1,7 @@
 ---
 title: Leomara Furquin
 category: avaliação
-date: 2026-10-23T14:25:00.000-03:00
+date: 2026-10-26T15:19:00.000-03:00
 image: /images/uploads/as-avaliacoes-do-google-1024x538.jpg
 summary: Experiência
 ---
