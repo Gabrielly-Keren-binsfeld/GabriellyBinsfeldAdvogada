@@ -45,6 +45,20 @@
             }
         }
     </script>
+
+    <!-- TikTok Pixel Code Start -->
+    <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+    var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+    ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+      ttq.load('DBHOQDRC77UASCMGS9KG');
+      ttq.page();
+    }(window, document, 'ttq');
+    </script>
+    <!-- TikTok Pixel Code End -->
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
@@ -264,10 +278,9 @@
         <div class="max-w-6xl mx-auto px-4 text-center">
             <a href="https://maps.app.goo.gl/Vpys6v2R3usUzJFv8" target="_blank" rel="noopener"
                class="inline-block mb-4" aria-label="Ver avaliações no Google">
-                <!-- ATENÇÃO: no atributo src abaixo, cole de volta o seu "data:image/jpeg;base64,..." original (a imagem do Google) -->
                 <img src="images/uploads/as-avaliacoes-do-google-1024x538.jpg"
-     alt="Avaliações do Google" width="220" height="116"
-     class="w-44 sm:w-56 h-auto mx-auto" style="mix-blend-mode: multiply;">
+                     alt="Avaliações do Google" width="220" height="116"
+                     class="w-44 sm:w-56 h-auto mx-auto" style="mix-blend-mode: multiply;">
             </a>
             <h2 class="font-serif text-3xl font-bold text-navy-900 mb-3">Avaliações no Google</h2>
             <p class="text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto">
@@ -557,6 +570,14 @@
 
             carregar();
         })();
+    </script>
+
+    <!-- TikTok: registra cliques nos links do WhatsApp como evento "Contact" -->
+    <script>
+        document.addEventListener('click', function (e) {
+            var a = e.target.closest('a[href*="wa.me"]');
+            if (a && window.ttq) ttq.track('Contact');
+        });
     </script>
 
     <!-- Redirecionamento do Netlify Identity para o painel -->
