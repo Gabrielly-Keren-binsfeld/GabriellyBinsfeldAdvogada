@@ -1,6 +1,6 @@
 ---
 title: "BPC/LOAS em 2026: Quem tem direito ao benefício de um salário mínimo?"
-date: 2026-11-23T13:12:00.000-03:00
+date: 2026-11-23T17:20:00.000-03:00
 categoria: Inss
 description: >-
   Você sabia que existe um benefício pago pelo Governo Federal, no valor de um
@@ -11,7 +11,7 @@ description: >-
 
   Diferente da aposentadoria, o BPC é um benefício assistencial. Isso significa que você não precisa ter "pagado o INSS" para recebê-lo, mas precisa cumprir requisitos específicos de renda e saúde.
 ---
-## v1. Quem pode receber o BPC?
+## 1. Quem pode receber o BPC?
 
 O benefício é dividido em dois grupos principais:
 
