@@ -1,0 +1,80 @@
+---
+title: "BPC/LOAS em 2026: Quem tem direito ao benefício de um salário mínimo?"
+date: 2026-11-23T13:05:00.000-03:00
+categoria: inss
+description: >-
+  Você sabia que existe um benefício pago pelo Governo Federal, no valor de um
+  salário mínimo mensal, destinado a pessoas que nunca contribuíram para o INSS?
+  Estamos falando do BPC (Benefício de Prestação Continuada), popularmente
+  conhecido como LOAS.
+
+
+  Diferente da aposentadoria, o BPC é um benefício assistencial. Isso significa que você não precisa ter "pagado o INSS" para recebê-lo, mas precisa cumprir requisitos específicos de renda e saúde.
+---
+## 1. Quem pode receber o BPC?
+
+O benefício é dividido em dois grupos principais:
+
+* **Idosos:** Pessoas com 65 anos ou mais.
+* **Pessoas com Deficiência (PcD):** De qualquer idade, desde que a deficiência cause impedimentos de longo prazo (mínimo de 2 anos) de natureza física, mental, intelectual ou sensorial que dificultem a participação plena na sociedade.
+
+## 2. O Critério da Renda (Regra de Ouro)
+
+Para ter direito, a renda por pessoa do grupo familiar deve ser de até **1/4 do salário mínimo**.
+
+**Novidade Importante:** Atualmente, o INSS permite deduzir (descontar) da renda bruta familiar os gastos comprovados com:
+
+* Medicamentos e fraldas;
+* Alimentos especiais;
+* Consultas e tratamentos médicos.
+* *Desde que esses itens não sejam fornecidos gratuitamente pelo SUS.*
+
+Isso ajuda muitas famílias que, na conta matemática simples, passariam do limite, mas que na realidade gastam quase tudo com a saúde do idoso ou da pessoa com deficiência.
+
+## 3. Quem faz parte do "Grupo Familiar"?
+
+Para o cálculo da renda, o INSS considera apenas: o cônjuge ou companheiro, os pais (ou madrasta/padrasto), os irmãos solteiros, os filhos e enteados solteiros e os menores tutelados, desde que vivam **sob o mesmo teto**.
+
+**Dica de Especialista:** O valor do BPC ou de uma aposentadoria de um salário mínimo recebido por outro idoso (acima de 65 anos) ou pessoa com deficiência da mesma casa **não entra no cálculo da renda**.
+
+## 4. Requisitos Obrigatórios em 2026
+
+Com as mudanças recentes na legislação, os cuidados com a documentação aumentaram:
+
+1. **CadÚnico Atualizado:** É a porta de entrada. O cadastro deve ter sido atualizado nos últimos 2 anos.
+2. **CPF para todos:** Todos os membros da família devem ter CPF regular no cadastro.
+3. **Biometria Obrigatória:** De acordo com as normas de 2025/2026, o cadastro biométrico nas bases do governo é obrigatório para o requerente (ou para o seu responsável legal).
+
+## 5. BPC não é Aposentadoria!
+
+É fundamental entender as diferenças:
+
+* O BPC **não paga 13º salário**.
+* O BPC **não deixa pensão por morte** para os dependentes.
+* O BPC exige revisão a cada 2 anos para verificar se as condições de renda e saúde permanecem.
+
+## 6. O BPC foi negado? Não desista.
+
+Muitos pedidos são negados injustamente por erros no preenchimento do CadÚnico ou avaliações periciais equivocadas. Na justiça, os critérios para análise da "miserabilidade" costumam ser mais flexíveis do que no balcão do INSS.
+
+### **Precisa de ajuda para conseguir o seu BPC?**
+
+Se você se enquadra nos requisitos ou conhece alguém que precisa deste benefício, nossa equipe de especialistas pode ajudar na organização dos documentos e no acompanhamento de todo o processo administrativo ou judicial.
+
+**\[CLIQUE AQUI PARA FALAR COM UM ESPECIALISTA NO WHATSAPP]***(Link para o seu atendimento)*
+
+*Este artigo possui caráter meramente informativo. Para análises específicas, consulte sempre um advogado previdenciarista.*
+
+no painel de controle onde posto os artigos nao esta aparecendo os que postei e nem o campo de imagem para adicionar. na netlify
+
+Entendi o problema, Josias, mas preciso fazer um esclarecimento importante: a **Tramitação Inteligente** (onde eu sou sua assistente) e a **Netlify** (onde seu site está hospedado) são plataformas totalmente diferentes.
+
+Eu não encontrei nenhuma funcionalidade de integração direta ou painel de controle de sites externos (como a Netlify) dentro da nossa plataforma. Por isso, eu não consigo acessar o seu site nem corrigir erros no painel de postagens dele.
+
+O que você está enfrentando na Netlify parece ser um problema técnico no **Netlify CMS** (ou Decap CMS), que é a ferramenta que muitos sites usam para postar artigos. Aqui estão os motivos mais comuns para isso acontecer:
+
+1. **Erro no arquivo `config.yml`:** O campo de imagem e a listagem de artigos dependem de um arquivo de configuração no código do seu site. Se algo foi alterado ali, o campo pode sumir.
+2. **Problema de Sincronização (Git):** O painel da Netlify funciona "conversando" com um repositório de arquivos (como o GitHub ou GitLab). Se essa conexão falhar, os artigos novos não aparecem.
+3. **Cache do Navegador:** Tente abrir o painel do seu site em uma **aba anônima** do navegador para ver se os campos voltam a aparecer.
+
+![](https://planilha.tramitacaointeligente.com.br/vite/assets/icon64-BiUbWElj.png)**TramitaIA**
