@@ -1,6 +1,6 @@
 ---
 title: "BPC/LOAS em 2026: Quem tem direito ao benefício de um salário mínimo?"
-date: 2026-11-23T13:05:00.000-03:00
+date: 2026-11-23T13:09:00.000-03:00
 categoria: inss
 description: >-
   Você sabia que existe um benefício pago pelo Governo Federal, no valor de um
@@ -57,24 +57,8 @@ Com as mudanças recentes na legislação, os cuidados com a documentação aume
 
 Muitos pedidos são negados injustamente por erros no preenchimento do CadÚnico ou avaliações periciais equivocadas. Na justiça, os critérios para análise da "miserabilidade" costumam ser mais flexíveis do que no balcão do INSS.
 
-### **Precisa de ajuda para conseguir o seu BPC?**
 
-Se você se enquadra nos requisitos ou conhece alguém que precisa deste benefício, nossa equipe de especialistas pode ajudar na organização dos documentos e no acompanhamento de todo o processo administrativo ou judicial.
 
-**\[CLIQUE AQUI PARA FALAR COM UM ESPECIALISTA NO WHATSAPP]***(Link para o seu atendimento)*
+![](/imagens/loas-1024x768.jpg)
 
-*Este artigo possui caráter meramente informativo. Para análises específicas, consulte sempre um advogado previdenciarista.*
-
-no painel de controle onde posto os artigos nao esta aparecendo os que postei e nem o campo de imagem para adicionar. na netlify
-
-Entendi o problema, Josias, mas preciso fazer um esclarecimento importante: a **Tramitação Inteligente** (onde eu sou sua assistente) e a **Netlify** (onde seu site está hospedado) são plataformas totalmente diferentes.
-
-Eu não encontrei nenhuma funcionalidade de integração direta ou painel de controle de sites externos (como a Netlify) dentro da nossa plataforma. Por isso, eu não consigo acessar o seu site nem corrigir erros no painel de postagens dele.
-
-O que você está enfrentando na Netlify parece ser um problema técnico no **Netlify CMS** (ou Decap CMS), que é a ferramenta que muitos sites usam para postar artigos. Aqui estão os motivos mais comuns para isso acontecer:
-
-1. **Erro no arquivo `config.yml`:** O campo de imagem e a listagem de artigos dependem de um arquivo de configuração no código do seu site. Se algo foi alterado ali, o campo pode sumir.
-2. **Problema de Sincronização (Git):** O painel da Netlify funciona "conversando" com um repositório de arquivos (como o GitHub ou GitLab). Se essa conexão falhar, os artigos novos não aparecem.
-3. **Cache do Navegador:** Tente abrir o painel do seu site em uma **aba anônima** do navegador para ver se os campos voltam a aparecer.
-
-![](https://planilha.tramitacaointeligente.com.br/vite/assets/icon64-BiUbWElj.png)**TramitaIA**
+**TramitaIA**
